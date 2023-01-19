@@ -12,25 +12,22 @@ nav {
   
   .nav-left {
     flex: 1;
+    text-align: left;
   }
-  
-  .nav-right {
+
+  /* Features */
+
+  .row {
+    display: flex;
+}
+
+.col-img {
     flex: 1;
-    text-align: right;
-  }
-  
-  .logo {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .signup-btn {
-    background-color: #ff6347;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    margin-left: 10px;
-  }
+    padding: 10px;
+}
+
+.col-txt {
+    flex: 3;
+    padding: 10px;
+}
+
