@@ -14,6 +14,10 @@ def home():
     """ the main view of the app """
     return render_template("main.html")
 
+@app.route('/dashboard/')
+def about():
+    return render_template('dashboard.html')
+
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():

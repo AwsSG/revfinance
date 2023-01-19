@@ -4,7 +4,7 @@
   "description": "Social money lending platform.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "npx tailwindcss -i ./static/src/input.css -o ./static/css/output.css --watch"
   },
   "repository": {
     "type": "git",
