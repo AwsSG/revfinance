@@ -25,3 +25,5 @@ All static files are linked to base html template, main html template inherets f
 
 to run the live server, run the following command in the terminal:
 > python3 app.py
+ 
+ hello
