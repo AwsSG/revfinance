@@ -16,10 +16,10 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = "Users"
     UserId = Column(Integer, primary_key=True)
-    FirstName = Column(String(50))
-    LastName = Column(String(50))
-    EmailAddress = Column(String(200))
-    Password = Column(String(50))
+    FirstName = Column(String(50), nullable=False)
+    LastName = Column(String(50), nullable=False)
+    EmailAddress = Column(String(200), nullable=False, unique=True)
+    Password = Column(String(50), nullable=False)
 
 
 # Create a new instance of sessionamaker, then point to our engine
@@ -38,7 +38,27 @@ Base.metadata.create_all(db)
 session.commit()
 
 
+# Get Users
+users = session.query(User)
+
+def get_users():
+    inspector = inspect(db.engine)
+    if inspector.has_table("Users") == True:
+        results = []
+
+        for user in users:
+            new = {
+                "Id": user.UserId,
+                "Name": user.FirstName + user.LastName,
+                "Email": user.EmailAddress,
+                "Password": user.Password
+            }
+            results.append(new) 
+
+        return results
+    else:
+        print('error')
+        return None
+
 # Close connection
 session.close()
-
-
