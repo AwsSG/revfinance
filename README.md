@@ -27,6 +27,7 @@ All static files are linked to base html template, main html template inherets f
 to run the live server, run the following command in the terminal:
 > python3 app.py
 
+
 ### Tailwind Installation Guide
 Tailwind is added with the NPM (Node Package Manager), To be able to use it on your machine you need to have Node.js installed:
 
@@ -39,3 +40,5 @@ After Node.js is installed, install the Tailwind by running the following comman
 To compile Tailwind to work during development use command:
 
 > npx tailwindcss -i ./static/src/input.css -o ./static/output.css --watch
+
+
