@@ -1,8 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import (
-    inspect, func, Column, DateTime, Integer, String, Boolean, JSON
+    inspect, func, Column, DateTime, Integer, Float, String, Boolean, JSON
 )
-
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from creds import database_credentials
@@ -20,6 +20,19 @@ class User(Base):
     LastName = Column(String(50), nullable=False)
     EmailAddress = Column(String(200), nullable=False, unique=True)
     Password = Column(String(50), nullable=False)
+
+
+# Create a class-based model for the "Pots" database
+class Pot(Base):
+    __tablename__ = "Pots"
+    PotId = Column(Integer, primary_key=True)
+    PotTitle = Column(String(50), nullable=False)
+    GoalAmount = Column(Float, nullable=False)
+    PayCycle = Column(String(200), nullable=False)
+    PaymentAmount = Column(Float, nullable=False)
+    isPrivate = Column(Boolean, unique=False, default=True)
+    Peers = Column(ARRAY(String), nullable=False)
+
 
 
 # Create a new instance of sessionamaker, then point to our engine
@@ -59,6 +72,33 @@ def get_users():
     else:
         print('error')
         return None
+
+
+# Get Pots
+pots = session.query(Pot)
+
+def get_pots():
+    inspector = inspect(db.engine)
+    if inspector.has_table("Pots") == True:
+        results = []
+
+        for pot in pots:
+            new = {
+                "Id": pot.PotId,
+                "Title": pot.PotTitle,
+                "Goal": pot.GoalAmount,
+                "Cycle": pot.PayCycle,
+                "PaymentAmount": pot.PaymentAmount,
+                "Private": pot.isPrivate,
+                "PerrsEmails": pot.Peers
+            }
+            results.append(new) 
+
+        return results
+    else:
+        print('error creating pot')
+        return None
+
 
 # Close connection
 session.close()
