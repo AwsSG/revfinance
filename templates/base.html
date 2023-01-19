@@ -5,13 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css">
     {% block style %}
     {% endblock %}
     <title>App name</title>
 </head>
 
 <body>
+    <nav>
+        <div class="nav-left">
+          <a href="#" class="logo">My Website</a>
+        </div>
+        <div class="nav-right">
+          <a href="#" class="signup-btn">Sign Up</a>
+        </div>
+      </nav>
     <header>
         <h2>Main header of the site</h2>
     </header>
