@@ -41,4 +41,6 @@ To compile Tailwind to work during development use command:
 
 > npx tailwindcss -i ./static/src/input.css -o ./static/output.css --watch
 
+For faster development, npm script has been added. Run command:
 
+>  npm run watch
