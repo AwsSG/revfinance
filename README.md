@@ -35,3 +35,7 @@ Download Node.js [here](https://nodejs.org/en/)
 After Node.js is installed, install the Tailwind by running the following command in the terminal from the roof of the project:
 
 > npm install
+
+To compile Tailwind to work during development use command:
+
+> npx tailwindcss -i ./static/src/input.css -o ./static/output.css --watch
