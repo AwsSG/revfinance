@@ -1,0 +1,22 @@
+{
+  "name": "revfinance",
+  "version": "1.0.0",
+  "description": "Social money lending platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JiiXaa/revfinance.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JiiXaa/revfinance/issues"
+  },
+  "homepage": "https://github.com/JiiXaa/revfinance#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
