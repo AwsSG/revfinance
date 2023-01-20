@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300&display=swap');
+
+@layer base {
+    h1 {
+        @apply font-archivo-black;
+        @apply text-4xl;
+    }
+    h2 {
+        @apply font-archivo-black;
+        @apply text-2xl;
+    }
+    body, p {
+        @apply font-inter;
+    }
+}

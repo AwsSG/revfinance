@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form">
+
+    <form id="signUp" action="signup" method="POST">
+        <p id="errorMsg"></p>
+        <label for="fName">First Name:</label><br>
+        <input type="text" id="fName" name="fName"><br>
+        <label for="lName">Last Name:</label><br>
+        <input type="text" id="lName" name="lName"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
+        <input type="submit" value="Sign Up!">
+    </form>
+</div>
+
+<!-- This div is to be deleted, it is just to display the users -->
+{% if users == None %}
+<h1>No users</h1>
+{% else %}
+<div>
+    <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.Id }}</td>
+        <td>{{ user.Name }}</td>
+        <td>{{ user.Email }}</td>
+        <td>{{ user.Password }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+</div>
+{% endif %}
+
+{% endblock %}
