@@ -29,12 +29,18 @@
           <li class="mr-6  hover:text-fluorescent-blue">
             <a href="">Money Pots</a>
           </li">
+          {% if session.user %}
+          <li class="mr-6  hover:text-fluorescent-blue">
+            <a href="">Logout</a>
+          </li>
+          {% else %}
           <li class="mr-6  hover:text-fluorescent-blue">
             <a href="{{ url_for('signup') }}">Register</a>
           </li>
           <li class="mr-6  hover:text-fluorescent-blue">
-            <a href="">Login</a>
+            <a href="{{ url_for('login') }}">Login</a>
           </li>
+          {% endif %}
         </ul>
       </nav>
     </header>
