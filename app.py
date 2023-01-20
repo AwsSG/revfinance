@@ -52,10 +52,10 @@ def create_pot():
         # Create records in our database
 
         private = True
-        formValue = request.form.get('private').lower()
-        if formValue in ('y', 'yes', 't', 'true', 'on', '1'):
+        formValue = request.form.get('private')
+        if formValue in ('y', 'yes', 't', 'true', 'True', 'on', '1'):
             private = True
-        elif formValue in ('n', 'no', 'f', 'false', 'off', '0'):
+        elif formValue in ('n', 'no', 'f', 'false', 'False', 'off', '0', None):
             private = False
         else:
             raise ValueError("invalid truth value %r" % (formValue,))
@@ -66,6 +66,8 @@ def create_pot():
             PayCycle = request.form.get('cycle'),
             PaymentAmount = request.form.get('amount'),
             isPrivate = private,
+            Creator = 1,
+            # The creator will need to get the user ID from the get from
             Peers = request.form.get('peer1')
         )
         
