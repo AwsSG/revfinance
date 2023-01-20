@@ -15,7 +15,33 @@
 </head>
 
 <body>
-    <nav>
+  <div class="containter mx-auto bg-han-purple">
+    <header class="flex">
+      <div>
+        <i class="fa-solid fa-piggy-bank text-white text-4xl"></i>
+        <span class="text-4xl font-archivo-black text-white">Money Pot</span>
+      </div>
+      <nav class="bg-han-purple justify-between">
+        <ul class="flex text-white">
+          <li>
+            <a href="main.html">Home</a>
+          </li>
+          <li>
+            <a href="">Money Pots</a>
+          </li>
+          <li>
+            <a href="signup.html">Register</a>
+          </li>
+          <li>
+            <a href="">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+  
+  <!--
+  <nav>
         <div class="nav-left">
           <a href="#" class="logo">My Website</a>
         </div>
@@ -26,7 +52,7 @@
     <header>
         <h1>Test Heading</h1>
         <h2 class="text-fluorescent-blue font-archivo-black">Main header of the site</h2>
-    </header>
+    </header> -->
 
     <!-- flash messages -->
     <section>
@@ -41,7 +67,8 @@
     <footer>
         <p>main footer of the site</p>
     </footer>
-
+    <!-- fontawesome script -->
+    <script src="https://kit.fontawesome.com/f687081393.js" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     {% block script %}
     {% endblock %}
