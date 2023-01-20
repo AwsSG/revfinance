@@ -90,7 +90,7 @@ def get_pots():
                 "Cycle": pot.PayCycle,
                 "PaymentAmount": pot.PaymentAmount,
                 "Private": pot.isPrivate,
-                "PerrsEmails": pot.Peers
+                "PeersEmails": pot.Peers
             }
             results.append(new) 
 
@@ -98,7 +98,3 @@ def get_pots():
     else:
         print('error creating pot')
         return None
-
-
-# Close connection
-session.close()

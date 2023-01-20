@@ -1,4 +1,5 @@
 import os
+from sqlalchemy.exc import SQLAlchemyError
 from flask import Flask, render_template, request
 from database import User, Pot, session, get_users, get_pots
 
@@ -30,16 +31,17 @@ def signup():
             EmailAddress = request.form.get('email'),
             Password = request.form.get('password')
         )
+
         # Add each instance into the session
         session.add(new_user)
         try:
             session.commit()
-        except:
+        except SQLAlchemyError as e:
             session.rollback()
-            print("There was an error submitting this request. Please, try again.")
-    session.close()
+            error = str(e.__dict__['orig'])
+            print(error)
     data = get_users()
-    print(data)
+    session.close()
     return render_template("signup.html", users=data)
 
 
@@ -49,23 +51,35 @@ def create_pot():
     if request.method == "POST":
         # Create records in our database
 
+        private = True
+        formValue = request.form.get('private').lower()
+        if formValue in ('y', 'yes', 't', 'true', 'on', '1'):
+            private = True
+        elif formValue in ('n', 'no', 'f', 'false', 'off', '0'):
+            private = False
+        else:
+            raise ValueError("invalid truth value %r" % (formValue,))
+
         new_pot = Pot(
             PotTitle = request.form.get('title'),
             GoalAmount = request.form.get('goal'),
             PayCycle = request.form.get('cycle'),
             PaymentAmount = request.form.get('amount'),
-            isPrivate = request.form.get('private'),
+            isPrivate = private,
             Peers = request.form.get('peer1')
         )
+        
         # Add each instance into the session
         session.add(new_pot)
+        print(new_pot)
         try:
             session.commit()
-        except:
+        except SQLAlchemyError as e:
             session.rollback()
-            print("There was an error submitting this request. Please, try again.")
-    session.close()
+            error = str(e.__dict__['orig'])
+            print(error)
     data = get_pots()
+    session.close()
     return render_template("createPot.html", pots=data)
 
 
