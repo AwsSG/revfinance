@@ -47,7 +47,7 @@
             <th>Cycle</th>
             <th>Amount</th>
             <th>Private</th>
-            <th>Peers</th>
+            <th>Creator</th>
         </tr>
     {% for pot in pots %}
     <tr>
@@ -57,7 +57,7 @@
         <td>{{ pot.Cycle }}</td>
         <td>{{ pot.Private }}</td>
         <td>{{ pot.PaymentAmount }}</td>
-        <td>{{ pot.PeersEmails }}</td>
+        <td>{{ pot.Creator }}</td>
     </tr>
     {% endfor %}
     </table>
