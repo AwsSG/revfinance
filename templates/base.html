@@ -50,37 +50,37 @@
         {% endblock %}
     </main>
 
-    <footer>
-      <div class="containter w-full h-24 bg-han-purple flex justify-between">
-        <!-- copyright and disclaimer -->
-        <div>
-          <p class="text-white ml-10 text-sm">
-            © Copyright Hackthon Team. 
-          </p>
-          <p class="text-white ml-10 text-sm">
-            Disclaimer: this website was created for...
-          </p>
-        </div>  
-
+    <footer class="p-6 bg-han-purple text-center">
+      <div class="container">
         <!-- social media icons -->
         <div>
-            <ul class="flex text-2xl text-white pt-8">
-              <li class="mr-6 hover:text-fluorescent-blue">
+            <ul class="text-2xl text-white text-center">
+              <li class="inline mr-6 hover:text-fluorescent-blue">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fa-brands fa-facebook"></i></a>
               </li>
-              <li class="mr-6 hover:text-fluorescent-blue">
+              <li class="inline mr-6 hover:text-fluorescent-blue">
                 <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Visit our Instagram page (opens in a new tab)"><i class="fa-brands fa-instagram"></i></a>
               </li>
-              <li class="mr-6 hover:text-fluorescent-blue">
+              <li class="inline mr-6 hover:text-fluorescent-blue">
                 <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Visit our Twitter page (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
               </li>
-              <li class="mr-6 hover:text-fluorescent-blue">
+              <li class="inline mr-6 hover:text-fluorescent-blue">
                 <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Visit our LinkedIn page (opens in a new tab)"><i class="fa-brands fa-linkedin"></i></a>
               </li>
             </ul>
-          </div>
+        </div>
+          <!-- copyright and disclaimer -->
+        <div class="text-center p-4">
+          <p class="text-center text-white">
+            © Copyright Hackthon Team.
+          </p>
+          <p class="text-center text-white">
+            Disclaimer: this website was created for educational purposes only.
+          </p>
+        </div>  
       </div>
     </footer>
+
     <!-- fontawesome script -->
     <script src="https://kit.fontawesome.com/f687081393.js" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
