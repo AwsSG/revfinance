@@ -5,7 +5,18 @@ module.exports = {
   "./static/src/**/*.js"
   ],
   theme: {
-    extend: {},
+    colors: {
+      'fluorescent-blue': '#44E5E7',
+      'han-purple': '#552CE9',
+      'white': '#ffffff',
+      'raisen-black': '#272727'
+    },
+    extend: {
+      fontFamily: {
+        'archivo-black': ['Archivo Black', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
