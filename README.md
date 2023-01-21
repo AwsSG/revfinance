@@ -45,21 +45,3 @@ For faster development, npm script has been added. Run command:
 
 >  npm run watch
 
-
-### Connect to the database Guide
-To connect to the databse you need to follow these steps:
-
-- Create a new file called creds.py
-
-- Enter the following code
-
-        from sqlalchemy import create_engine
-    
-        # Database Credentials
-        DB_HOST = ""
-        DB_NAME = ""
-        DB_USER = ""
-        DB_PASS = ""
-    
-        def database_credentials():
-        return create_engine(f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}")
