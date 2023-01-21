@@ -4,7 +4,11 @@
 <div class="form">
 
     <form id="signUp" action="signup" method="POST">
-        <p id="errorMsg"></p>
+        <p id="errorMsg">
+            {% if error != None %}
+            {{ error }}
+            {% endif %}
+        </p>
         <label for="fName">First Name:</label><br>
         <input type="text" id="fName" name="fName"><br>
         <label for="lName">Last Name:</label><br>
@@ -13,6 +17,8 @@
         <input type="email" id="email" name="email"><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password"><br>
+        <label for="checkPassword">Re-eneter password:</label><br>
+        <input type="password" id="checkPassword" name="checkPassword"><br>
         <input type="submit" value="Sign Up!">
     </form>
 </div>
@@ -31,10 +37,10 @@
         </tr>
     {% for user in users %}
         <tr>
-            <td>{{ user.Id }}</td>
-            <td>{{ user.Name }}</td>
-            <td>{{ user.Email }}</td>
-            <td>{{ user.Password }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.fName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.password }}</td>
       </tr>
     {% endfor %}
     </table>
