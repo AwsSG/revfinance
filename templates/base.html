@@ -15,12 +15,13 @@
 </head>
 
 <body>
-  <div class="containter mx-auto bg-han-purple">
-    <header class="flex p-6">
+  <div class="bg-han-purple">
+    <header class="p-6 lg:flex">
       <div>
-        <i class="fa-solid fa-piggy-bank text-white text-4xl mr-2"></i>
-        <span class="text-4xl font-archivo-black text-white mr-6">Money Pot</span>
+        <i class="fa-solid fa-piggy-bank text-white text-3xl mr-2 lg:text-4xl"></i>
+        <span class="text-3xl font-archivo-black text-white mr-6 lg:text-5xl">Money Pot</span>
       </div>
+
       <nav class="bg-han-purple justify-between sm:text-center">
         <ul class="flex text-white">
           <li class="mr-6 hover:text-fluorescent-blue">
@@ -43,9 +44,9 @@
           {% endif %}
         </ul>
       </nav>
+
     </header>
   </div>
-  
 
     <!-- flash messages -->
     <section>
@@ -57,32 +58,37 @@
         {% endblock %}
     </main>
 
-    <footer class="containter w-full h-24 bg-han-purple flex justify-between sm:float-none">
-      <!-- copyright and disclaimer -->
-      <div>
-        <p class="text-white ml-10 pt-8">
-          Copyright Hackthon Team. Disclaimer: this website was created for...
-        </p>
-      </div>  
-
-      <!-- social media icons -->
-      <div>
-          <ul class="flex text-2xl text-white align-middle pt-8">
-            <li class="mr-6 hover:text-fluorescent-blue">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fa-brands fa-facebook"></i></a>
-            </li>
-            <li class="mr-6 hover:text-fluorescent-blue">
-              <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Visit our Instagram page (opens in a new tab)"><i class="fa-brands fa-instagram"></i></a>
-            </li>
-            <li class="mr-6 hover:text-fluorescent-blue">
-              <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Visit our Twitter page (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
-            </li>
-            <li class="mr-6 hover:text-fluorescent-blue">
-              <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Visit our LinkedIn page (opens in a new tab)"><i class="fa-brands fa-linkedin"></i></a>
-            </li>
-          </ul>
+    <footer class="p-6 bg-han-purple text-center">
+      <div class="container">
+        <!-- social media icons -->
+        <div>
+            <ul class="text-2xl text-white text-center">
+              <li class="inline mr-6 hover:text-fluorescent-blue">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fa-brands fa-facebook"></i></a>
+              </li>
+              <li class="inline mr-6 hover:text-fluorescent-blue">
+                <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Visit our Instagram page (opens in a new tab)"><i class="fa-brands fa-instagram"></i></a>
+              </li>
+              <li class="inline mr-6 hover:text-fluorescent-blue">
+                <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Visit our Twitter page (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
+              </li>
+              <li class="inline mr-6 hover:text-fluorescent-blue">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="Visit our LinkedIn page (opens in a new tab)"><i class="fa-brands fa-linkedin"></i></a>
+              </li>
+            </ul>
         </div>
+          <!-- copyright and disclaimer -->
+        <div class="text-center p-4">
+          <p class="text-center text-white">
+            © Copyright Hackthon Team.
+          </p>
+          <p class="text-center text-white">
+            Disclaimer: this website was created for educational purposes only.
+          </p>
+        </div>  
+      </div>
     </footer>
+
     <!-- fontawesome script -->
     <script src="https://kit.fontawesome.com/f687081393.js" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
