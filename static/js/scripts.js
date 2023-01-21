@@ -43,4 +43,36 @@ $(document).ready(function(){
         }
     })
 
+
+    /**
+     * Add validation for new pot form
+     */
+
+
+    $('#createPot').submit( (e) => {
+        let errors = []
+        const title = $('#title')
+        const goal = $('#goal')
+        const amount = $('#amount')
+        const errorField = $('#errorMsg')
+
+        if(title.val() === "" || title.val() === null) {
+            errors.push('Please, enter a title for your money pot.')
+        }
+
+        if(goal.val() === "" || goal.val() === null) {
+            errors.push('Please, enter a goal amount.')
+        }
+
+        if(amount.val() === "" || amount.val() === null) {
+            errors.push('Please, enter the recurrent payment amount.')
+        }
+
+        if (errors.length > 0) {
+            e.preventDefault()
+            errorField.html(errors.join('<br>'))
+        }
+    })
+
+
 });
