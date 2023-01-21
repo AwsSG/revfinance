@@ -22,22 +22,28 @@
         <span class="text-3xl font-archivo-black text-white mr-6 lg:text-5xl">Money Pot</span>
       </div>
 
-        <nav class="bg-han-purple lg:justify-between">
-          <ul class="flex text-white">
-            <li class="hover:text-fluorescent-blue mr-6">
-              <a href="main.html">Home</a>
-            </li>
-            <li class="hover:text-fluorescent-blue mr-6">
-              <a href="">Money Pots</a>
-            </li">
-            <li class="hover:text-fluorescent-blue mr-6">
-              <a href="signup.html">Register</a>
-            </li>
-            <li class="hover:text-fluorescent-blue mr-6">
-              <a href="">Login</a>
-            </li>
-          </ul>
-        </nav>
+      <nav class="bg-han-purple justify-between sm:text-center">
+        <ul class="flex text-white">
+          <li class="mr-6 hover:text-fluorescent-blue">
+            <a href="{{ url_for('home') }}">Home</a>
+          </li>
+          <li class="mr-6  hover:text-fluorescent-blue">
+            <a href="">Money Pots</a>
+          </li">
+          {% if session.user %}
+          <li class="mr-6  hover:text-fluorescent-blue">
+            <a href="">Logout</a>
+          </li>
+          {% else %}
+          <li class="mr-6  hover:text-fluorescent-blue">
+            <a href="{{ url_for('signup') }}">Register</a>
+          </li>
+          <li class="mr-6  hover:text-fluorescent-blue">
+            <a href="{{ url_for('login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
 
     </header>
   </div>
