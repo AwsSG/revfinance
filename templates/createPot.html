@@ -51,13 +51,13 @@
         </tr>
     {% for pot in pots %}
     <tr>
-        <td>{{ pot.Id }}</td>
-        <td>{{ pot.Title }}</td>
-        <td>{{ pot.Goal }}</td>
-        <td>{{ pot.Cycle }}</td>
-        <td>{{ pot.Private }}</td>
-        <td>{{ pot.PaymentAmount }}</td>
-        <td>{{ pot.Creator }}</td>
+        <td>{{ pot.id }}</td>
+        <td>{{ pot.title }}</td>
+        <td>{{ pot.goal }}</td>
+        <td>{{ pot.cycle }}</td>
+        <td>{{ pot.isPrivate }}</td>
+        <td>{{ pot.amount }}</td>
+        <td>{{ pot.creator }}</td>
     </tr>
     {% endfor %}
     </table>
