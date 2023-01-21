@@ -4,7 +4,11 @@
 <div class="form">
 
     <form id="signUp" action="signup" method="POST">
-        <p id="errorMsg"></p>
+        <p id="errorMsg">
+            {% if error != None %}
+            {{ error }}
+            {% endif %}
+        </p>
         <label for="fName">First Name:</label><br>
         <input type="text" id="fName" name="fName"><br>
         <label for="lName">Last Name:</label><br>

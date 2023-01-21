@@ -55,13 +55,23 @@ def dashboard():
 def signup():
     """ Sign up page """
     if request.method == "POST":
-        # Create records in our database
 
+        fName = request.form.get('fName')
+        lName = request.form.get('lName')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        # Check if user exists
+        duplicateUser = None
+        exists = Users.query.filter_by(email=email).first()
+
+        if exists:
+            duplicateUser = "There is alredy an account with this email."
+        # Create records in our database
         new_user = Users(
-            fName = request.form.get('fName'),
-            lName = request.form.get('lName'),
-            email = request.form.get('email'),
-            password = request.form.get('password')
+            fName = fName,
+            lName = lName,
+            email = email,
+            password = password
         )
 
         # Add each instance into the database
@@ -76,7 +86,7 @@ def signup():
             print(error)
     
     data = Users.query
-    return render_template("signup.html", users=data)
+    return render_template("signup.html", users=data, error=duplicateUser)
 
 
 @app.route("/login", methods=["GET", "POST"])
