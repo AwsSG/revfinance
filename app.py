@@ -8,7 +8,7 @@ from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
-from sendInvites import sendInvites
+from utils import sendInvites
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
