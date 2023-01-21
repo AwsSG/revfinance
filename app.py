@@ -83,7 +83,7 @@ def signup():
 def login():
     if request.method == "POST":
         # set variables
-        users = get_users()
+        users = Users.query
         user_email = request.form.get("email")
         user_pw = request.form.get("password")
         user_index = next((index for (index, d) in enumerate(users) if d['Email'] == user_email), None)
@@ -98,9 +98,9 @@ def login():
                 return redirect(url_for("dashboard"))
         else:
             flash("Incorrect username and/or password")
-            return redirect(url_for("login"))
             print("user not exist")
-
+            return redirect(url_for("login"))
+            
     return render_template("login.html")
 
 
