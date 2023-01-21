@@ -8,7 +8,8 @@ from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
-from utils import sendInvites
+# Send email invites to users to join a pot
+from sendInvites import sendInvites
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
@@ -63,11 +64,11 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         # Check if user exists
-        
+
         exists = Users.query.filter_by(email=email).first()
 
         if exists:
-            duplicateUser = "There is alredy an account with this email."
+            duplicateUser = "There is already an account with this email."
         # Create records in our database
         new_user = Users(
             fName = fName,
@@ -86,7 +87,7 @@ def signup():
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
-    
+
     data = Users.query
     return render_template("signup.html", users=data, error=duplicateUser)
 
@@ -112,7 +113,7 @@ def login():
             flash("Incorrect username and/or password")
             print("user not exist")
             return redirect(url_for("login"))
-            
+
     return render_template("login.html")
 
 
@@ -164,7 +165,7 @@ def create_pot():
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
-    
+
     data = Pots.query
     return render_template("createPot.html", pots=data)
 
