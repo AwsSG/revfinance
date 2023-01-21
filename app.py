@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect,url_for, flash
+from flask import session as ssn
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
@@ -10,7 +11,7 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
-
+app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
 
@@ -24,6 +25,7 @@ class Users(db.Model):
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
+
 
 # Create db model for potss table
 class Pots(db.Model):
@@ -43,8 +45,9 @@ def home():
     """ the main view of the app """
     return render_template("main.html")
 
+
 @app.route('/dashboard/')
-def about():
+def dashboard():
     return render_template('dashboard.html')
 
 
@@ -76,18 +79,52 @@ def signup():
     return render_template("signup.html", users=data)
 
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # set variables
+        users = get_users()
+        user_email = request.form.get("email")
+        user_pw = request.form.get("password")
+        user_index = next((index for (index, d) in enumerate(users) if d['Email'] == user_email), None)
+        # check if user exist in db
+        if user_index:
+            print("user found!")
+        # check if password is correct
+            if users[user_index]["Password"] == user_pw:
+                print(ssn["user"])
+                ssn["user"] = users[user_index]["Name"]
+                flash("Welcome, {}".format(ssn["user"]))
+                return redirect(url_for("dashboard"))
+        else:
+            flash("Incorrect username and/or password")
+            return redirect(url_for("login"))
+            print("user not exist")
+
+    return render_template("login.html")
+
+
 @app.route("/createPot", methods=["GET", "POST"])
 def create_pot():
     """ Create pot page """
     if request.method == "POST":
         # Create records in our database
 
+        private = True
+        formValue = request.form.get('private')
+        if formValue in ('y', 'yes', 't', 'true', 'True', 'on', '1'):
+            private = True
+        elif formValue in ('n', 'no', 'f', 'false', 'False', 'off', '0', None):
+            private = False
+        else:
+            raise ValueError("invalid truth value %r" % (formValue,))
+
         new_pot = Pots(
             title = request.form.get('title'),
             goal = request.form.get('goal'),
             cycle = request.form.get('cycle'),
             amount = request.form.get('amount'),
-            isPrivate = request.form.get('private'),
+            isPrivate = private,
             # Once the login is completed we can get the logged user id
             creator = 1
         )
