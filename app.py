@@ -1,13 +1,32 @@
 import os
-from sqlalchemy.exc import SQLAlchemyError
-from flask import Flask, render_template, request
-from database import User, Pot, session, get_users, get_pots
+#from sqlalchemy.exc import SQLAlchemyError
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
 
 if os.path.exists("env.py"):
     import env
 
 
 app = Flask(__name__)
+
+# Create database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////moneypot.db'
+
+
+# Initialize database
+db = SQLAlchemy(app)
+
+# Create a class-based model for the "Users" database
+class Users(db.Model):
+    UserId = db.Column(db.Integer, primary_key=True)
+    FirstName = db.Column(db.String(50), nullable=False)
+    LastName = db.Column(db.String(50), nullable=False)
+    EmailAddress = db.Column(db.String(200), nullable=False, unique=True)
+    Password = db.Column(db.String(50), nullable=False)
+
+    # Create String
+    def __repr__(self):
+        return '<Name %r>' % self.name
 
 
 @app.route("/")
@@ -19,70 +38,6 @@ def home():
 def about():
     return render_template('dashboard.html')
 
-
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    """ Sign up page """
-    if request.method == "POST":
-        # Create records in our database
-        new_user = User(
-            FirstName = request.form.get('fName'),
-            LastName = request.form.get('lName'),
-            EmailAddress = request.form.get('email'),
-            Password = request.form.get('password')
-        )
-
-        # Add each instance into the session
-        session.add(new_user)
-        try:
-            session.commit()
-        except SQLAlchemyError as e:
-            session.rollback()
-            error = str(e.__dict__['orig'])
-            print(error)
-    data = get_users()
-    session.close()
-    return render_template("signup.html", users=data)
-
-
-@app.route("/createPot", methods=["GET", "POST"])
-def create_pot():
-    """ Create pot page """
-    if request.method == "POST":
-        # Create records in our database
-
-        private = True
-        formValue = request.form.get('private')
-        if formValue in ('y', 'yes', 't', 'true', 'True', 'on', '1'):
-            private = True
-        elif formValue in ('n', 'no', 'f', 'false', 'False', 'off', '0', None):
-            private = False
-        else:
-            raise ValueError("invalid truth value %r" % (formValue,))
-
-        new_pot = Pot(
-            PotTitle = request.form.get('title'),
-            GoalAmount = request.form.get('goal'),
-            PayCycle = request.form.get('cycle'),
-            PaymentAmount = request.form.get('amount'),
-            isPrivate = private,
-            Creator = 1,
-            # The creator will need to get the user ID from the get from
-            Peers = request.form.get('peer1')
-        )
-        
-        # Add each instance into the session
-        session.add(new_pot)
-        print(new_pot)
-        try:
-            session.commit()
-        except SQLAlchemyError as e:
-            session.rollback()
-            error = str(e.__dict__['orig'])
-            print(error)
-    data = get_pots()
-    session.close()
-    return render_template("createPot.html", pots=data)
 
 
 if __name__ == "__main__":
