@@ -8,6 +8,7 @@ from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
+from sendInvites import sendInvites
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
@@ -140,10 +141,23 @@ def create_pot():
             creator = 1
         )
 
+        peer1 = request.form.get('peer1')
+        peer2 = request.form.get('peer2')
+        peer3 = request.form.get('peer3')
+        peer4 = request.form.get('peer4')
+
+        peers = []
+        peers.append(peer1)
+        peers.append(peer2)
+        peers.append(peer3)
+        peers.append(peer4)
+
+
         # Add each instance into the database
         try:
             db.session.add(new_pot)
             db.session.commit()
+            sendInvites(peers)
             # We can redirect to index if we want to
             # return redirect('/dashboard')
         except SQLAlchemyError as e:

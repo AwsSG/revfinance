@@ -71,6 +71,9 @@ $(document).ready(function(){
         if (errors.length > 0) {
             e.preventDefault()
             errorField.html(errors.join('<br>'))
+        } else {
+            peer = $('#peer1')
+            return peer
         }
     })
 
