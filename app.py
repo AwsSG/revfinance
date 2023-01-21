@@ -54,6 +54,7 @@ def dashboard():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     """ Sign up page """
+    duplicateUser = None
     if request.method == "POST":
 
         fName = request.form.get('fName')
@@ -61,7 +62,7 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         # Check if user exists
-        duplicateUser = None
+        
         exists = Users.query.filter_by(email=email).first()
 
         if exists:
