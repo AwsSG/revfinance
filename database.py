@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import (
-    inspect, func, Column, DateTime, Integer, Float, String, Boolean, JSON
+    inspect, ForeignKey, Column, DateTime, Integer, Float, String, Boolean, JSON
 )
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.declarative import declarative_base
@@ -31,6 +31,7 @@ class Pot(Base):
     PayCycle = Column(String(200), nullable=False)
     PaymentAmount = Column(Float, nullable=False)
     isPrivate = Column(Boolean, unique=False, default=True)
+    Creator = Column(Integer, ForeignKey(User.UserId))
     Peers = Column(ARRAY(String), nullable=False)
 
 
@@ -90,7 +91,8 @@ def get_pots():
                 "Cycle": pot.PayCycle,
                 "PaymentAmount": pot.PaymentAmount,
                 "Private": pot.isPrivate,
-                "PerrsEmails": pot.Peers
+                "Creator": pot.Creator,
+                "PeersEmails": pot.Peers
             }
             results.append(new) 
 
@@ -98,7 +100,3 @@ def get_pots():
     else:
         print('error creating pot')
         return None
-
-
-# Close connection
-session.close()

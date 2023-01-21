@@ -10,7 +10,7 @@
         <label for="goal">Goal Amount:</label><br>
         <input type="number" id="goal" name="goal"><br>
         <label for="cycle">Payment Cycle:</label><br>
-        <select name="cycle" id="cycle" form="createPot">
+        <select name="cycle" id="cycle">
             <option value="weekly">Weekly</option>
             <option value="Bi-weekly">Bi-Weekly</option>
             <option value="Monthly">Monthly</option>
@@ -41,22 +41,23 @@
 <div>
     <table>
         <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Goal</th>
-          <th>Cycle</th>
-          <th>Amount</th>
-          <th>Private</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Goal</th>
+            <th>Cycle</th>
+            <th>Amount</th>
+            <th>Private</th>
+            <th>Creator</th>
         </tr>
     {% for pot in pots %}
     <tr>
         <td>{{ pot.Id }}</td>
         <td>{{ pot.Title }}</td>
         <td>{{ pot.Goal }}</td>
-        <td>{{ pot.Cycle}}</td>
-        <td>{{ pot.PaymentAmount }}</td>
+        <td>{{ pot.Cycle }}</td>
         <td>{{ pot.Private }}</td>
-
+        <td>{{ pot.PaymentAmount }}</td>
+        <td>{{ pot.Creator }}</td>
     </tr>
     {% endfor %}
     </table>
