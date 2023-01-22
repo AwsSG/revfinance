@@ -2,13 +2,13 @@ import os
 from flask import Flask, render_template, request, redirect,url_for, flash
 from flask import session as ssn
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData, engine
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 
 if os.path.exists("env.py"):
     import env
 
-# Send email invites to users to join a pot
 from sendInvites import sendInvites
 
 app = Flask(__name__)
@@ -26,10 +26,10 @@ class Users(db.Model):
     password = db.Column(db.String(120), nullable=False)
     # String to return name when something is added to database
     def __repr__(self):
-        return '<Name %r>' % self.id
+        return '<Name %r>' % self.email
 
 
-# Create db model for potss table
+# Create db model for pots table
 class Pots(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
@@ -38,6 +38,7 @@ class Pots(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
     creator = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -64,11 +65,11 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         # Check if user exists
-
+        
         exists = Users.query.filter_by(email=email).first()
 
         if exists:
-            duplicateUser = "There is already an account with this email."
+            duplicateUser = "There is alredy an account with this email."
         # Create records in our database
         new_user = Users(
             fName = fName,
@@ -83,11 +84,12 @@ def signup():
             db.session.commit()
             # We can redirect to index if we want to
             # return redirect('/dashboard')
+
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
-
+    
     data = Users.query
     return render_template("signup.html", users=data, error=duplicateUser)
 
@@ -113,7 +115,7 @@ def login():
             flash("Incorrect username and/or password")
             print("user not exist")
             return redirect(url_for("login"))
-
+            
     return render_template("login.html")
 
 
@@ -132,16 +134,6 @@ def create_pot():
         else:
             raise ValueError("invalid truth value %r" % (formValue,))
 
-        new_pot = Pots(
-            title = request.form.get('title'),
-            goal = request.form.get('goal'),
-            cycle = request.form.get('cycle'),
-            amount = request.form.get('amount'),
-            isPrivate = private,
-            # Once the login is completed we can get the logged user id
-            creator = 1
-        )
-
         peer1 = request.form.get('peer1')
         peer2 = request.form.get('peer2')
         peer3 = request.form.get('peer3')
@@ -153,6 +145,15 @@ def create_pot():
         peers.append(peer3)
         peers.append(peer4)
 
+        new_pot = Pots(
+            title = request.form.get('title'),
+            goal = request.form.get('goal'),
+            cycle = request.form.get('cycle'),
+            amount = request.form.get('amount'),
+            isPrivate = private,
+            # Once the login is completed we can get the logged user id
+            creator = 1
+        )
 
         # Add each instance into the database
         try:
@@ -161,11 +162,22 @@ def create_pot():
             sendInvites(peers)
             # We can redirect to index if we want to
             # return redirect('/dashboard')
+
+            # Create new table for single pot
+            latest_id = db.session.query(Pots).order_by(Pots.id.desc()).first()
+            
+            add_creator = new_pot_table(
+                user_id = 1,
+                role = "creator"
+            )
+            db.session.add(add_creator)
+            db.session.commit()
+
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
-
+    
     data = Pots.query
     return render_template("createPot.html", pots=data)
 
