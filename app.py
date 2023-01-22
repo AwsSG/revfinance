@@ -2,16 +2,17 @@ import os
 from flask import Flask, render_template, request, redirect,url_for, flash
 from flask import session as ssn
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData, engine
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 
 if os.path.exists("env.py"):
     import env
 
+# Send email invites to users to join a pot
 from sendInvites import sendInvites
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
 app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
@@ -35,26 +36,23 @@ class Users(db.Model):
     all_pots = db.relationship('Pots', secondary=user_pots, backref='all_participants')
     # String to return name when something is added to database
     def __repr__(self):
-        return '<Name %r>' % self.email
+        return '<Name %r>' % self.id
 
 
-# Create db model for pots table
+# Create db model for potss table
 class Pots(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     goal = db.Column(db.Integer, nullable=False)
+    currency = db.Column(db.String(50), nullable=False)
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
-    currency = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
-        return "#{0} - Name: {1} | Creator {2)".format(
-            self.id, self.title, self.creator
-        )
-
+        return '<Name %r>' % self.id
 
 @app.route("/")
 def home():
@@ -78,11 +76,11 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         # Check if user exists
-        
+
         exists = Users.query.filter_by(email=email).first()
 
         if exists:
-            duplicateUser = "There is alredy an account with this email."
+            duplicateUser = "There is already an account with this email."
         # Create records in our database
         new_user = Users(
             fName = fName,
@@ -97,12 +95,11 @@ def signup():
             db.session.commit()
             # We can redirect to index if we want to
             # return redirect('/dashboard')
-
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
-    
+
     data = Users.query
     return render_template("signup.html", users=data, error=duplicateUser)
 
@@ -122,7 +119,7 @@ def login():
         else:
             flash("Incorrect username and/or password")
             return redirect(url_for("login"))
-            
+
     return render_template("login.html")
 
 
@@ -177,15 +174,11 @@ def create_pot():
             sendInvites(peers)
             # We can redirect to index if we want to
             # return redirect('/dashboard')
-
-            # Create new table for single pot
-            latest_id = db.session.query(Pots).order_by(Pots.id.desc()).first()
-        
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
-    
+
     data = Pots.query
     return render_template("createPot.html", pots=data)
 
