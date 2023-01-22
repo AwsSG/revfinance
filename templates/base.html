@@ -5,27 +5,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
-
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <!-- TailwindCSS dark mode localStorage checker -->
+    <script>
+      // It's best to inline this in `head` to avoid FOUC (flash of unstyled content) when changing pages or themes
+      console.log('first line of script')
+      if (
+        localStorage.getItem('color-theme') === 'dark' ||
+        (!('color-theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
     {% block style %}
     {% endblock %}
     <title>App name</title>
 </head>
 
 <body>
-  <div class="bg-han-purple">
+  <div class="bg-han-purple dark:bg-raisen-black">
     <header class="p-5 md:flex md:p-7">
       <div>
         <i class="fa-solid fa-piggy-bank text-4xl mr-2 lg:text-5xl text-white"></i>
         <span class="font-archivo-black text-4xl md:mr-8 lg:text-5xl text-white">Money Pot</span>
       </div>
 
-      <nav class="pt-3 items-end bg-han-purple md:flex">
+      <nav class="pt-3 items-end bg-han-purple md:flex dark:bg-raisen-black">
         <ul class="flex justify-center text-white md:text-xl">
           <li class="mr-4 hover:text-fluorescent-blue md:mr-7">
             <a href="{{ url_for('home') }}">Home</a>
@@ -46,6 +57,36 @@
           </li>
           {% endif %}
         </ul>
+        <button
+  id="theme-toggle"
+  type="button"
+  class="text-white dark:bg-white dark:text-gray-700 bg-gray-700 focus:outline-none dark:focus:ring-gray-700 rounded-lg text-sm p-1"
+>
+  <svg
+    id="theme-toggle-dark-icon"
+    class="w-6 h-6 hidden"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+    ></path>
+  </svg>
+  <svg
+    id="theme-toggle-light-icon"
+    class="w-6 h-6 hidden"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+    ></path>
+  </svg>
+</button>
       </nav>
 
     </header>
@@ -61,7 +102,7 @@
         {% endblock %}
     </main>
 
-    <footer class="p-7 bg-han-purple">
+    <footer class="p-7 bg-han-purple dark:bg-raisen-black">
       <div>
         <!-- social media icons -->
         <div>
@@ -88,7 +129,7 @@
           <p class="text-center text-white">
             <span class="font-bold">Disclaimer:</span> this website was created for educational purposes only.
           </p>
-        </div>  
+        </div>
       </div>
     </footer>
 
