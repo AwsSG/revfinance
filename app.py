@@ -37,9 +37,10 @@ class Pots(db.Model):
     goal = db.Column(db.Integer, nullable=False)
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
+    currency = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    peers = db.Column(db.ARRAY(db.JSON))
+    creator = db.relationship('Users', backref='creator')
+    peers = db.relationship('Users', backref='peer')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
