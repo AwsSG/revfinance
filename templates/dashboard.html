@@ -47,14 +47,11 @@
     </div>
 
     <!-- Pots in progress -->
-    <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Ongoing pots</h3>
+    <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Ongoing Pots</h3>
     <div id="pots-container" class="grid grid-cols-5 gap-6 py-[2rem]">
-      
-
-      
     </div>
 
     <!-- Private pots count -->
-    <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private pots: {{ private_pots.count() }}</h3>
-    <p class="text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there is (count here) pots live.</p>
+    <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private Pots</h3>
+    <p class="text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there are {{ private_pots.count() }} private pots live.</p>
 {% endblock %}
