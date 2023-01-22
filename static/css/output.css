@@ -588,6 +588,7 @@ p{
   margin-bottom: 0px;
 }
 
+
 .mr-2{
   margin-right: 0.5rem;
 }
@@ -660,6 +661,7 @@ p{
 .w-1\/2{
   width: 50%;
 }
+
 
 .w-\[80\%\]{
   width: 80%;
@@ -925,6 +927,7 @@ p{
   .md\:mr-8{
     margin-right: 2rem;
   }
+
 
   .md\:mt-\[5rem\]{
     margin-top: 5rem;
