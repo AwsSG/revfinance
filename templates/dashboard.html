@@ -21,22 +21,40 @@
           <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-han-purple dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
         </div>
       </article>
-    </div>
 
-    <!-- Pots in progress -->
-    <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Ongoing pots</h3>
-    <div id="pots-container" class="grid grid-cols-5 gap-6 py-[2rem]">
       <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
         <div class="flex flex-col justify-center">
           <p class="text-center text-xl font-bold my-2">100&#163; weekly</p>
           <p class="text-center text-xl font-bold mb-6">1000&#163; by the 10th week</p>
           <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
-          <p class="text-end mb-6 font-bold mr-3">Pot is closed</p>
+          <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
+          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-han-purple dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
         </div>
       </article>
+
+      {% for pot in pots %}
+      <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
+        <div class="flex flex-col justify-center">
+          <h5>{{ pot.title }}</h5>
+          <p class="text-center text-xl font-bold my-2">{{ pot.amount }}{{ pot.currency }} {{ pot.cycle }}</p>
+          <p class="text-center text-xl font-bold mb-6">{{ pot.goal }}{{ pot.currency }} by the 10th week</p>
+          <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
+          <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
+          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-han-purple dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- Pots in progress -->
+    <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Ongoing pots</h3>
+    <div id="pots-container" class="grid grid-cols-5 gap-6 py-[2rem]">
+      
+
+      
     </div>
 
     <!-- Private pots count -->
-    <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private pots count</h3>
+    <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private pots: {{ private_pots.count() }}</h3>
     <p class="text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there is (count here) pots live.</p>
 {% endblock %}

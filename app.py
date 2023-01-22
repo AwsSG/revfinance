@@ -61,7 +61,12 @@ def home():
 
 @app.route('/dashboard/')
 def dashboard():
-    return render_template('dashboard.html')
+
+    pots = Pots.query
+    public_pots = pots.filter_by(isPrivate=False)
+    private_pots = pots.filter_by(isPrivate=True)
+
+    return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
 
 
 @app.route("/signup", methods=["GET", "POST"])
