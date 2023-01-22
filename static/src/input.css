@@ -5,19 +5,35 @@
 @tailwind utilities;
 
 @layer base {
+    body {
+        @apply font-inter;
+        @apply text-raisen-black;
+        @apply bg-baby-powder;
+        @apply dark:bg-independence;
+
+
+    }
     h1 {
         @apply font-archivo-black;
         @apply text-4xl;
         @apply text-han-purple;
+        @apply dark:text-rajah;
         @apply text-center;
     }
-    h2 {
+    h2, h3 {
         @apply font-archivo-black;
         @apply text-2xl;
         @apply text-han-purple;
+        @apply dark:text-rajah;
     }
-    body, p {
+
+    h3 {
+        @apply text-xl;
+    }
+
+    p {
         @apply font-inter;
-        @apply text-raisen-black
+        @apply text-raisen-black;
+        @apply text-baby-powder;
     }
 }
