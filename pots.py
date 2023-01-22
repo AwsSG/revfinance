@@ -1,20 +1,21 @@
 
-new_pot_table = db.Table(tableName,
-db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-db.Column('user_email', db.String, db.ForeignKey('users.email')),
-db.Column('role', db.String)
-)
+from sqlalchemy import Table, Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 
-db.create_all()
+Base = declarative_base()
 
-tableName = str(latest_id.id)
-            new_pot_table = db.Table(tableName,
-            db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-            db.Column('user_email', db.String, db.ForeignKey('users.email')),
-            db.Column('role', db.String)
-            )
+def NewPot(id, db): 
+    tableName = id.id
+    new_table = Table(
+        tableName,
+        Base.metadata,
+        Column("row_id", Integer, primary_key=True),
+        Column("user_id", String),
+        Column("role", String)
+    )
+    db.create_all()
+    return new_table
 
-            db.create_all()
 
 
 

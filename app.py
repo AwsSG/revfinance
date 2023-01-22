@@ -10,6 +10,7 @@ if os.path.exists("env.py"):
     import env
 
 from sendInvites import sendInvites
+from pots import NewPot
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
@@ -165,14 +166,8 @@ def create_pot():
 
             # Create new table for single pot
             latest_id = db.session.query(Pots).order_by(Pots.id.desc()).first()
-            
-            add_creator = new_pot_table(
-                user_id = 1,
-                role = "creator"
-            )
-            db.session.add(add_creator)
-            db.session.commit()
-
+            NewPot(latest_id,db)
+        
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
