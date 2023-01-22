@@ -12,7 +12,7 @@ if os.path.exists("env.py"):
 from sendInvites import sendInvites
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
 app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
@@ -25,6 +25,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
+    pots = db.relationship('Pots', backref='creator')
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.email
@@ -39,8 +40,7 @@ class Pots(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     currency = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator = db.relationship('Users', backref='creator')
-    peers = db.relationship('Users', backref='peer')
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
@@ -156,11 +156,11 @@ def create_pot():
         new_pot = Pots(
             title = request.form.get('title'),
             goal = request.form.get('goal'),
+            currency = request.form.get('currency'),
             cycle = request.form.get('cycle'),
             amount = request.form.get('amount'),
             isPrivate = private,
             # Once the login is completed we can get the logged user id
-            creator = 1
         )
 
         # Add each instance into the database
