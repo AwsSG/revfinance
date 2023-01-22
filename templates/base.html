@@ -46,7 +46,7 @@
           </li>
           {% if session.user %}
           <li class="mr-4 hover:text-fluorescent-blue md:mr-7">
-            <a href="">Logout</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
           </li>
           {% else %}
           <li class="mr-4 hover:text-fluorescent-blue md:mr-7">
