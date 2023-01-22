@@ -17,6 +17,12 @@ app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
 
+# Association table for users and pots
+user_pots = db.Table('user_pots', 
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
+    )
+
 
 # Create db model for users table
 class Users(db.Model):
@@ -25,7 +31,8 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    pots = db.relationship('Pots', backref='creator')
+    created_pots = db.relationship('Pots', backref='creator')
+    all_pots = db.relationship('Pots', secondary=user_pots, backref='all_participants')
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.email
