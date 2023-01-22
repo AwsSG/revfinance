@@ -596,6 +596,7 @@ p{
   margin-bottom: 0px;
 }
 
+
 .mr-2{
   margin-right: 0.5rem;
 }
@@ -614,6 +615,7 @@ p{
 
 .mb-20{
   margin-bottom: 5rem;
+
 }
 
 .block{
@@ -664,8 +666,18 @@ p{
   width: 50%;
 }
 
+
 .w-\[80\%\]{
   width: 80%;
+}
+
+
+.w-4\/6{
+  width: 66.666667%;
+}
+
+.w-2\/3{
+  width: 66.666667%;
 }
 
 .max-w-4xl{
@@ -790,21 +802,25 @@ p{
   padding-top: 2rem;
 }
 
+
 .pt-6{
   padding-top: 1.5rem;
 }
 
 .pb-4{
   padding-bottom: 1rem;
+
 }
 
 .pb-20{
   padding-bottom: 5rem;
 }
 
+
 .pl-0{
   padding-left: 0px;
 }
+
 
 .text-center{
   text-align: center;
@@ -1005,6 +1021,7 @@ p{
     margin-right: 2rem;
   }
 
+
   .md\:mt-\[5rem\]{
     margin-top: 5rem;
   }
@@ -1017,12 +1034,22 @@ p{
     width: 70%;
   }
 
-  .md\:w-1\/2{
-    width: 50%;
+
+  .md\:w-5\/6{
+    width: 83.333333%;
   }
 
   .md\:w-1\/4{
     width: 25%;
+  }
+
+
+  .md\:w-1\/2{
+    width: 50%;
+  }
+
+  .md\:w-2\/3{
+    width: 66.666667%;
   }
 
   .md\:justify-between{
@@ -1096,17 +1123,25 @@ p{
 }
 
 @media (min-width: 1024px){
+
   .lg\:w-\[\]{
     width: ;
   }
 
   .lg\:w-\[60\%\]{
     width: 60%;
+
   }
 
   .lg\:text-5xl{
     font-size: 3rem;
     line-height: 1;
+  }
+}
+
+@media (min-width: 1280px){
+  .xl\:w-1\/4{
+    width: 25%;
   }
 }
 
@@ -1121,5 +1156,6 @@ p{
 
   .\32xl\:w-\[50\%\]{
     width: 50%;
+
   }
 }
