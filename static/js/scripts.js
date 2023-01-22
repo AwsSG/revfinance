@@ -144,8 +144,17 @@ themeToggleBtn.addEventListener('click', function() {
     }
 });
 
+// Toggles burger menu 
+function myFunction() {
+    var x = document.getElementById("myTopNav");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
 
-/* Validate email */
+  /* Validate email */
 function validateEmail(email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return emailReg.test( email );
