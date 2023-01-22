@@ -103,25 +103,27 @@ def signup():
 def login():
     if request.method == "POST":
         # set variables
-        users = Users.query
         user_email = request.form.get("email")
         user_pw = request.form.get("password")
-        user_index = next((index for (index, d) in enumerate(users) if d['Email'] == user_email), None)
-        # check if user exist in db
-        if user_index:
-            print("user found!")
-        # check if password is correct
-            if users[user_index]["Password"] == user_pw:
-                print(ssn["user"])
-                ssn["user"] = users[user_index]["Name"]
-                flash("Welcome, {}".format(ssn["user"]))
+        Filtered = Users.query.filter_by(email=user_email).first()
+        if Filtered: # check if user exist
+            if Filtered.password == user_pw: # check if password is correct
+                ssn["user"] = Filtered.fName
+                flash("Welcome, {}".format(Filtered.fName))
                 return redirect(url_for("dashboard"))
         else:
             flash("Incorrect username and/or password")
-            print("user not exist")
             return redirect(url_for("login"))
             
     return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out successfully!")
+    ssn.pop("user")
+    return redirect(url_for('home'))
 
 
 @app.route("/createPot", methods=["GET", "POST"])
