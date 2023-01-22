@@ -35,47 +35,48 @@
       }
     </script>
     {% block style %} {% endblock %}
-    <title>App name</title>
+    <title>Money Pot</title>
   </head>
 
   <body>
     <main class="min-h-screen flex flex-col justify-between">
       <div aria-label="content-wrapper">
-        <header
-          class="items-center md:flex md:py-5 md:px-[4rem] md:justify-between bg-trypan-blue dark:bg-space-cadet"
-        >
-          <div>
-            <i
-              class="fa-solid fa-piggy-bank text-4xl mr-2 lg:text-5xl text-white"
-            ></i>
-            <span
-              class="font-archivo-black text-4xl md:mr-8 lg:text-5xl text-white"
-              >Money Pot</span
-            >
+
+        <header class="items-center lg:flex lg:py-5 lg:px-[4rem] lg:justify-between bg-trypan-blue dark:bg-space-cadet">
+          <!-- logo -->
+          <div class="pt-4 pl-4 lg:pt-0">
+            <i class="fa-solid fa-piggy-bank text-4xl mr-2 md:text-5xl text-white"></i>
+            <span class="font-archivo-black text-4xl md:text-5xl text-white"><a href="{{ url_for('home') }}">Money Pot</a></span>
+
           </div>
-          <nav class="pt-3 items-end bg-inherit md:flex dark:bg-inherit">
-            <ul
-              class="flex justify-center md:space-x-[3rem] text-white md:text-xl"
-            >
-              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
+          <!-- navigation menu -->
+          <nav class="pt-3 pl-8 lg:pl-0 items-end bg-inherit lg:flex dark:bg-inherit">
+            <ul class="hidden lg:flex lg:justify-center lg:space-x-[3rem] text-white md:text-xl" id="myTopNav">
+              <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('home') }}">Home</a>
               </li>
-              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
+              <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('dashboard') }}">Money Pots</a>
               </li>
               {% if session.user %}
-              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
+              <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('logout') }}">Logout</a>
               </li>
               {% else %}
-              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
+              <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('signup') }}">Register</a>
               </li>
-              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
+              <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('login') }}">Login</a>
               </li>
               {% endif %}
             </ul>
+            <!-- burger menu -->
+            <div onclick="myFunction()" class="absolute top-4 right-0 mt-2 cursor-pointer float-right bg-han-purple dark:bg-rajah hover:bg-fluorescent-blue dark:hover:bg-fluorescent-blue mr-5 lg:hidden">
+                <span class="block w-8 h-0.5 m-2 bg-white"></span>
+                <span class="block w-8 h-0.5 m-2 bg-white"></span>
+                <span class="block w-8 h-0.5 m-2 bg-white"></span>
+            </div>
           </nav>
           <button
             id="theme-toggle"

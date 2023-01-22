@@ -593,13 +593,95 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   position: static;
 }
 
+
+.fixed{
+  position: fixed;
+}
+
+.absolute{
+  position: absolute;
+}
+
+.-left-full{
+  left: -100%;
+}
+
+.left-full{
+  left: 100%;
+}
+
+.left-\[\]{
+  left: ;
+}
+
+.left-\[-100\%\]{
+  left: -100%;
+}
+
+.top-0{
+  top: 0px;
+}
+
+.right-0{
+  right: 0px;
+}
+
+.bottom-0{
+  bottom: 0px;
+}
+
+.top-1{
+  top: 0.25rem;
+}
+
+.top-2{
+  top: 0.5rem;
+}
+
+.top-3{
+  top: 0.75rem;
+}
+
+.top-4{
+  top: 1rem;
+}
+
+.left-0{
+  left: 0px;
+}
+
+.left-5{
+  left: 1.25rem;
+}
+
+.left-4{
+  left: 1rem;
+}
+
+.float-right{
+  float: right;
+}
+
+.float-none{
+  float: none;
+}
+
 .m-auto{
   margin: auto;
 }
 
-.my-2{
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+
+.m-\[\]{
+  margin: ;
+}
+
+.m-\[5px-auto\]{
+  margin: 5px-auto;
+}
+
+.m-2{
+  margin: 0.5rem;
+
 }
 
 .mx-auto{
@@ -624,6 +706,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   margin-right: 1.5rem;
 }
 
+
 .mt-2{
   margin-top: 0.5rem;
 }
@@ -634,6 +717,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
 
 .mb-\[3rem\]{
   margin-bottom: 3rem;
+
 }
 
 .mb-8{
@@ -643,6 +727,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
 .ml-4{
   margin-left: 1rem;
 }
+
 
 .mb-6{
   margin-bottom: 1.5rem;
@@ -704,6 +789,18 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   height: 2.5rem;
 }
 
+.h-1{
+  height: 0.25rem;
+}
+
+.h-0\.5{
+  height: 0.125rem;
+}
+
+.h-0{
+  height: 0px;
+}
+
 .min-h-screen{
   min-height: 100vh;
 }
@@ -730,6 +827,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
 
 .w-2\/3{
   width: 66.666667%;
+
 }
 
 .cursor-pointer{
@@ -819,6 +917,16 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   background-color: rgb(68 229 231 / var(--tw-bg-opacity));
 }
 
+.bg-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .p-1{
   padding: 0.25rem;
 }
@@ -843,14 +951,10 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   padding: 0.5rem;
 }
 
-.px-5{
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 
-.py-4{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .py-2{
@@ -863,30 +967,31 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   padding-bottom: 2rem;
 }
 
+
 .py-1\.5{
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
 }
 
-.py-1{
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+.pb-8{
+  padding-bottom: 2rem;
 }
 
 .pt-3{
   padding-top: 0.75rem;
+
 }
 
-.pb-3{
-  padding-bottom: 0.75rem;
+.pl-8{
+  padding-left: 2rem;
 }
 
-.pb-20{
-  padding-bottom: 5rem;
+.pl-2{
+  padding-left: 0.5rem;
 }
 
-.pl-5{
-  padding-left: 1.25rem;
+.pr-2{
+  padding-right: 0.5rem;
 }
 
 .pt-5{
@@ -897,8 +1002,12 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   padding-bottom: 2.5rem;
 }
 
-.pb-4{
-  padding-bottom: 1rem;
+.pr-3{
+  padding-right: 0.75rem;
+}
+
+.text-left{
+  text-align: left;
 }
 
 .text-center{
@@ -970,6 +1079,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   --tw-text-opacity: 1;
   color: rgb(68 229 231 / var(--tw-text-opacity));
 }
+
 
 .shadow-2xl{
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
@@ -1072,6 +1182,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   color: rgb(252 255 253 / var(--tw-text-opacity));
 }
 
+
 .dark .dark\:text-raisen-black{
   --tw-text-opacity: 1;
   color: rgb(39 39 39 / var(--tw-text-opacity));
@@ -1080,6 +1191,7 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
 .dark .dark\:text-rajah{
   --tw-text-opacity: 1;
   color: rgb(245 166 91 / var(--tw-text-opacity));
+
 }
 
 .dark .dark\:shadow-rajah\/50{
@@ -1102,7 +1214,25 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   --tw-ring-color: rgb(43 45 66 / var(--tw-ring-opacity));
 }
 
+@media (min-width: 640px){
+  .sm\:flex{
+    display: flex;
+  }
+}
+
 @media (min-width: 768px){
+  .md\:left-full{
+    left: 100%;
+  }
+
+  .md\:left-0{
+    left: 0px;
+  }
+
+  .md\:left-5{
+    left: 1.25rem;
+  }
+
   .md\:float-right{
     float: right;
   }
@@ -1129,8 +1259,22 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
     margin-top: 5rem;
   }
 
+  .md\:mr-2{
+    margin-right: 0.5rem;
+  }
+
   .md\:flex{
     display: flex;
+  }
+
+  @media (min-width: 768px){
+    .md\:md\:flex{
+      display: flex;
+    }
+  }
+
+  .md\:hidden{
+    display: none;
   }
 
   .md\:w-\[70\%\]{
@@ -1145,6 +1289,11 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
     width: 25%;
   }
 
+
+  .md\:justify-center{
+    justify-content: center;
+  }
+
   .md\:justify-between{
     justify-content: space-between;
   }
@@ -1153,6 +1302,10 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
     --tw-space-x-reverse: 0;
     margin-right: calc(3rem * var(--tw-space-x-reverse));
     margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:p-0{
+    padding: 0px;
   }
 
   .md\:py-5{
@@ -1177,6 +1330,12 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
     padding-left: 2rem;
   }
 
+
+  .md\:pt-0{
+    padding-top: 0px;
+  }
+
+
   .md\:text-left{
     text-align: left;
   }
@@ -1193,9 +1352,79 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+
+  .md\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
 }
 
 @media (min-width: 1024px){
+
+  .lg\:right-0{
+    right: 0px;
+  }
+
+  .lg\:float-right{
+    float: right;
+  }
+
+  .lg\:flex{
+    display: flex;
+  }
+
+  .lg\:hidden{
+    display: none;
+  }
+
+  .lg\:w-1\/2{
+    width: 50%;
+  }
+
+  .lg\:justify-end{
+    justify-content: flex-end;
+  }
+
+  .lg\:justify-center{
+    justify-content: center;
+  }
+
+  .lg\:justify-between{
+    justify-content: space-between;
+  }
+
+  .lg\:space-x-\[3rem\] > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3rem * var(--tw-space-x-reverse));
+    margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .lg\:p-0{
+    padding: 0px;
+  }
+
+  .lg\:py-5{
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .lg\:px-\[4rem\]{
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .lg\:px-\[3rem\]{
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .lg\:pl-0{
+    padding-left: 0px;
+  }
+
+  .lg\:pt-0{
+    padding-top: 0px;
+
   .lg\:w-1\/2{
     width: 50%;
   }
@@ -1203,6 +1432,12 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
   .lg\:text-5xl{
     font-size: 3rem;
     line-height: 1;
+  }
+
+
+  .lg\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -1213,5 +1448,10 @@ article > div > p:nth-child(3), article > div > p:nth-child(4){
 
   .\32xl\:w-\[50\%\]{
     width: 50%;
+  }
+
+  .\32xl\:justify-between{
+    justify-content: space-between;
+
   }
 }
