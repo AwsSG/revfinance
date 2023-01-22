@@ -62,11 +62,16 @@ def home():
 @app.route('/dashboard/')
 def dashboard():
 
+    # Get the current user logged in
+    logged_user = ""
+    if "user" in ssn:
+        logged_user = ssn["user"]
+
     pots = Pots.query
     public_pots = pots.filter_by(isPrivate=False)
     private_pots = pots.filter_by(isPrivate=True)
 
-    return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
+    return render_template('dashboard.html', user=logged_user, pots=public_pots, private_pots=private_pots)
 
 
 @app.route("/signup", methods=["GET", "POST"])
