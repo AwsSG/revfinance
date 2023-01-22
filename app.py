@@ -13,7 +13,6 @@ from sendInvites import sendInvites
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
 app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)

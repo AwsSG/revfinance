@@ -3,26 +3,37 @@
 {% block content %}
     <h1>Welcome, username</h1>
 
-    <div class="mb-[2rem]">
-      <p class="mb-4 text-xl font-bold">Create a new pot and invite your friends:</p>
-      <a href="{{ url_for('create_pot') }}" class="bg-rajah rounded px-3 py-2 text-lg font-bold ml-4 transition-opacity hover:opacity-90">Create Pot</a>
-    </div>
+    <!-- Header with the create pot button -->
+    <header class="mb-[3rem]">
+      <p class="mb-8 text-xl font-bold">Create a new pot and invite your friends:</p>
+      <a href="{{ url_for('create_pot') }}" class="bg-fluorescent-blue dark:bg-rajah rounded px-5 py-4 text-han-purple dark:text-raisen-black text-lg font-bold ml-4 transition-opacity hover:opacity-90">Create Pot</a>
+    </header>
 
+    <!-- Join to a pot -->
     <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Join an existing pot</h3>
-    <div id="pots-container" class="grid grid-cols-6 gap-4 py-[2rem]">
-
-  
-      <a href="{{ url_for('create_pot') }}" class="rounded shadow-pot-card">
+    <div id="pots-container" class="grid grid-cols-5 gap-6 py-[2rem]">
+      <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
         <div class="flex flex-col justify-center">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</p>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
+          <p class="text-center text-xl font-bold my-2">100&#163; weekly</p>
+          <p class="text-center text-xl font-bold mb-6">1000&#163; by the 10th week</p>
+          <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
+          <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
+          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-han-purple dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
+        </div>
+      </article>
 
-      </div>
-      </a>
+      <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
+        <div class="flex flex-col justify-center">
+          <p class="text-center text-xl font-bold my-2">100&#163; weekly</p>
+          <p class="text-center text-xl font-bold mb-6">1000&#163; by the 10th week</p>
+          <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
+          <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
+          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-han-purple dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
+        </div>
+      </article>
+
       {% for pot in pots %}
+      <article class="rounded dark:bg-rhythm shadow-pot-card p-4"></article>
         <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
           <div class="flex flex-col justify-center">
             <h5>{{ pot.title }}</h5>
@@ -33,76 +44,21 @@
             <button>Join Pot</button>
           </div>
         </a>
-      {% endfor %}
-
+      </article>
+    {% endfor %}
     </div>
 
     <h3>Private pots: {{ private_pots.count() }}</h3>
 
+    <!-- Pots in progress -->
     <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Ongoing pots</h3>
-    <div id="pots-ongoing-container" class="grid grid-cols-6 gap-4 py-[2rem]">
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
-      <a href="{{ url_for('create_pot') }}" style="border: 2px solid black; padding: 1rem;">
-        <p>8/10 peers</p>
-        <p>100&#163; weekly</>
-        <p>1000&#163; by the 10th week</p>
-        <p>2 available spots left</p>
-        <button>Join Pot</button>
-      </a>
+    <div id="pots-container" class="grid grid-cols-5 gap-6 py-[2rem]">
+      
+
+      
     </div>
+
+    <!-- Private pots count -->
+    <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private pots count</h3>
+    <p class="text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there is (count here) pots live.</p>
 {% endblock %}
