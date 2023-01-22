@@ -72,14 +72,24 @@ $(document).ready(function(){
 
     inviteList = []
 
+    $('#invite').val().change( () => {
+
+        if(this.length == 0) {
+            $('#addToInvite').attr("disabled", false)
+        } else {
+            $('#addToInvite').attr("disabled", true)
+        }
+    })
+    
+
     /* Add list item button */
-    $('#addToInvite').click( (e) => {
-        
+    $('#addToInvite').click( () => {
+
         peerId = 0
         peerEmail = $('#invite').val()
         
-     
         if( validateEmail(peerEmail) ) { 
+            $('#addToInvite').attr("disabled", false)
             inviteList.push(peerEmail)
             displayAddedEmails()
             $('#invite').val('')
