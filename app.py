@@ -13,9 +13,17 @@ from sendInvites import sendInvites
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
 app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
+
+# Association table for users and pots
+user_pots = db.Table('user_pots', 
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
+    )
+
 
 # Create db model for users table
 class Users(db.Model):
@@ -24,6 +32,8 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
+    created_pots = db.relationship('Pots', backref='creator')
+    all_pots = db.relationship('Pots', secondary=user_pots, backref='all_participants')
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -34,10 +44,12 @@ class Pots(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     goal = db.Column(db.Integer, nullable=False)
+    currency = db.Column(db.String(50), nullable=False)
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -102,6 +114,7 @@ def login():
         if Filtered: # check if user exist
             if Filtered.password == user_pw: # check if password is correct
                 ssn["user"] = Filtered.fName
+                ssn["user_id"] = Filtered.id
                 flash("Welcome, {}".format(Filtered.fName))
                 return redirect(url_for("dashboard"))
         else:
@@ -116,6 +129,7 @@ def logout():
     # remove user from session cookie
     flash("You have been logged out successfully!")
     ssn.pop("user")
+    ssn.pop("user_id")
     return redirect(url_for('home'))
 
 
@@ -123,8 +137,16 @@ def logout():
 def create_pot():
     """ Create pot page """
     if request.method == "POST":
-        # Create records in our database
 
+        # Get the current user logged in
+        logged_user = 0
+        if ssn["user_id"]:
+            logged_user = ssn["user_id"]
+            print(logged_user)
+        else:
+            print('no user logged in')
+        
+        # Convert vlue from checkbox to accepted format
         private = True
         formValue = request.form.get('private')
         if formValue in ('y', 'yes', 't', 'true', 'True', 'on', '1'):
@@ -133,16 +155,6 @@ def create_pot():
             private = False
         else:
             raise ValueError("invalid truth value %r" % (formValue,))
-
-        new_pot = Pots(
-            title = request.form.get('title'),
-            goal = request.form.get('goal'),
-            cycle = request.form.get('cycle'),
-            amount = request.form.get('amount'),
-            isPrivate = private,
-            # Once the login is completed we can get the logged user id
-            creator = 1
-        )
 
         peer1 = request.form.get('peer1')
         peer2 = request.form.get('peer2')
@@ -155,6 +167,17 @@ def create_pot():
         peers.append(peer3)
         peers.append(peer4)
 
+        # Create records in our database
+        new_pot = Pots(
+            title = request.form.get('title'),
+            goal = request.form.get('goal'),
+            currency = request.form.get('currency'),
+            cycle = request.form.get('cycle'),
+            amount = request.form.get('amount'),
+            isPrivate = private,
+            creator_id = logged_user
+            # Once the login is completed we can get the logged user id
+        )
 
         # Add each instance into the database
         try:
