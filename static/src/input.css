@@ -16,14 +16,14 @@
     h1 {
         @apply font-archivo-black;
         @apply text-4xl;
-        @apply text-han-purple;
+        @apply text-trypan-blue;
         @apply dark:text-rajah;
         @apply text-center;
     }
     h2, h3 {
         @apply font-archivo-black;
         @apply text-2xl;
-        @apply text-han-purple;
+        @apply text-trypan-blue;
         @apply dark:text-rajah;
     }
 
@@ -46,7 +46,8 @@
     }
 
     article > div > p:nth-child(4), article > div > p:nth-child(5) {
-        @apply text-han-purple;
+        @apply text-trypan-blue;
+
         @apply dark:text-rajah;
     }
 }

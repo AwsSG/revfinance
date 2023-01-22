@@ -41,11 +41,13 @@
   <body>
     <main class="min-h-screen flex flex-col justify-between">
       <div aria-label="content-wrapper">
-        <header class="items-center lg:flex lg:py-5 lg:px-[4rem] lg:justify-between bg-han-purple dark:bg-space-cadet">
+
+        <header class="items-center lg:flex lg:py-5 lg:px-[4rem] lg:justify-between bg-trypan-blue dark:bg-space-cadet">
           <!-- logo -->
           <div class="pt-4 pl-4 lg:pt-0">
             <i class="fa-solid fa-piggy-bank text-4xl mr-2 md:text-5xl text-white"></i>
             <span class="font-archivo-black text-4xl md:text-5xl text-white"><a href="{{ url_for('home') }}">Money Pot</a></span>
+
           </div>
           <!-- navigation menu -->
           <nav class="pt-3 pl-8 lg:pl-0 items-end bg-inherit lg:flex dark:bg-inherit">
@@ -113,7 +115,7 @@
           {% block content %} {% endblock %}
         </section>
       </div>
-      <footer class="p-7 bg-han-purple dark:bg-space-cadet">
+      <footer class="p-7 bg-trypan-blue dark:bg-space-cadet">
         <!-- social media icons -->
         <div>
           <ul class="flex justify-center pb-3 text-2xl text-white">

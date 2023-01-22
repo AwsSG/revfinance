@@ -13,7 +13,8 @@ module.exports = {
         'independence': '#404363',
         'rhythm': '#494C6F',
         'baby-powder': '#FCFFFD',
-        'rajah': '#F5A65B'
+        'rajah': '#F5A65B',
+        'trypan-blue': '#3211A6',
       },
       fontFamily: {
         'archivo-black': ['Archivo Black', 'sans-serif'],
