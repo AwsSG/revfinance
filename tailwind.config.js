@@ -10,10 +10,13 @@ module.exports = {
         'white': '#ffffff',
         'raisen-black': '#272727',
         'space-cadet': '#2B2D42',
+        'independence': '#404363',
+        'baby-powder': '#FCFFFD',
+        'rajah': '#F5A65B'
       },
       fontFamily: {
         'archivo-black': ['Archivo Black', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
     },
   },
