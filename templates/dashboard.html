@@ -35,7 +35,7 @@
       {% for pot in pots %}
       <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
         <div class="flex flex-col justify-center">
-          <h5>{{ pot.title }}</h5>
+          <h5 class="text-[2rem] font-bold text-center mb-4 underline">{{ pot.title }}</h5>
           <p class="text-center text-xl font-bold my-2">{{ pot.amount }}{{ pot.currency }} {{ pot.cycle }}</p>
           <p class="text-center text-xl font-bold mb-6">{{ pot.goal }}{{ pot.currency }} by the 10th week</p>
           <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
