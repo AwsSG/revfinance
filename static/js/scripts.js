@@ -69,6 +69,41 @@ $(document).ready(function(){
             errorField.html(errors.join('<br>'))
         }
     })
+
+    inviteList = []
+
+    /* Add list item button */
+    $('#addToInvite').click( (e) => {
+        
+        peerId = 0
+        peerEmail = $('#invite').val()
+        
+     
+        if( validateEmail(peerEmail) ) { 
+            inviteList.push(peerEmail)
+            displayAddedEmails()
+            $('#invite').val('')
+        }
+        /* Remove list item button */
+        $('.withdrawInvite').on("click", withdrawInvite)
+    });
+
+    /* Delete list item */
+    function withdrawInvite() {
+        peerId = $(this).attr('data-id')
+        inviteList.splice(peerId,1)
+        displayAddedEmails()
+    }
+
+    /* Display added items */
+    function displayAddedEmails() {
+        display = $('.inviteList')
+        display.html("")
+        for(invite of inviteList) {
+            display.append(`<span class="list-item"><button class="withdrawInvite" data-id="${inviteList.indexOf(invite)}" type="button">X</button><p>${invite}</p></span>`)
+        }
+    } 
+
 });
 
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -108,3 +143,10 @@ themeToggleBtn.addEventListener('click', function() {
         }
     }
 });
+
+
+/* Validate email */
+function validateEmail(email) {
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test( email );
+    }

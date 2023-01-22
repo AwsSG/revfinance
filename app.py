@@ -31,8 +31,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    created_pots = db.relationship('Pots', backref='creator')
-    all_pots = db.relationship('Pots', secondary=user_pots, backref='all_participants')
+    joined_pots = db.Column(db.Integer, db.ForeignKey('pots.id'))
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -48,7 +47,7 @@ class Pots(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.Date, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -149,11 +148,8 @@ def create_pot():
 
         # Get the current user logged in
         logged_user = 0
-        if ssn["user_id"]:
+        if "user_id" in ssn:
             logged_user = ssn["user_id"]
-            print(logged_user)
-        else:
-            print('no user logged in')
         
         # Convert vlue from checkbox to accepted format
         private = True
@@ -171,10 +167,11 @@ def create_pot():
         peer4 = request.form.get('peer4')
 
         peers = []
+        """
         peers.append(peer1)
         peers.append(peer2)
         peers.append(peer3)
-        peers.append(peer4)
+        peers.append(peer4)"""
 
         # Create records in our database
         new_pot = Pots(
