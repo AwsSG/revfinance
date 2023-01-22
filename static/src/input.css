@@ -38,8 +38,8 @@
         @apply dark:text-baby-powder;
     }
 
-    a > p {
+    article > div > p:nth-child(3), article > div > p:nth-child(4) {
         @apply text-han-purple;
-        @apply dark:text-baby-powder;
+        @apply dark:text-rajah;
     }
 }
