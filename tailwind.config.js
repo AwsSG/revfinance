@@ -11,6 +11,7 @@ module.exports = {
         'raisen-black': '#272727',
         'space-cadet': '#2B2D42',
         'independence': '#404363',
+        'rhythm': '#494C6F',
         'baby-powder': '#FCFFFD',
         'rajah': '#F5A65B'
       },
