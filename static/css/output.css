@@ -485,14 +485,14 @@ p{
   color: rgb(252 255 253 / var(--tw-text-opacity));
 }
 
-a > p{
+article > div > p:nth-child(3), article > div > p:nth-child(4){
   --tw-text-opacity: 1;
   color: rgb(85 44 233 / var(--tw-text-opacity));
 }
 
-.dark a > p{
+.dark article > div > p:nth-child(3),.dark  article > div > p:nth-child(4){
   --tw-text-opacity: 1;
-  color: rgb(252 255 253 / var(--tw-text-opacity));
+  color: rgb(245 166 91 / var(--tw-text-opacity));
 }
 
 *, ::before, ::after{
@@ -593,6 +593,7 @@ a > p{
   position: static;
 }
 
+
 .fixed{
   position: fixed;
 }
@@ -669,6 +670,7 @@ a > p{
   margin: auto;
 }
 
+
 .m-\[\]{
   margin: ;
 }
@@ -679,6 +681,7 @@ a > p{
 
 .m-2{
   margin: 0.5rem;
+
 }
 
 .mx-auto{
@@ -703,12 +706,14 @@ a > p{
   margin-right: 1.5rem;
 }
 
+
 .mb-\[2rem\]{
   margin-bottom: 2rem;
+
 }
 
-.mb-4{
-  margin-bottom: 1rem;
+.mb-8{
+  margin-bottom: 2rem;
 }
 
 .ml-4{
@@ -825,6 +830,7 @@ a > p{
 
 .w-2\/3{
   width: 66.666667%;
+
 }
 
 .w-1{
@@ -837,6 +843,10 @@ a > p{
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.grid-cols-5{
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .grid-cols-6{
@@ -861,6 +871,10 @@ a > p{
 
 .justify-between{
   justify-content: space-between;
+}
+
+.gap-6{
+  gap: 1.5rem;
 }
 
 .gap-4{
@@ -922,6 +936,11 @@ a > p{
   background-color: rgb(245 166 91 / var(--tw-bg-opacity));
 }
 
+.bg-rhythm{
+  --tw-bg-opacity: 1;
+  background-color: rgb(73 76 111 / var(--tw-bg-opacity));
+}
+
 .bg-fluorescent-blue{
   --tw-bg-opacity: 1;
   background-color: rgb(68 229 231 / var(--tw-bg-opacity));
@@ -964,6 +983,7 @@ a > p{
 .px-3{
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+
 }
 
 .py-2{
@@ -976,12 +996,14 @@ a > p{
   padding-bottom: 2rem;
 }
 
-.pt-3{
-  padding-top: 0.75rem;
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
-.pb-3{
-  padding-bottom: 0.75rem;
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .pb-20{
@@ -1180,6 +1202,10 @@ a > p{
 .dark .dark\:bg-fluorescent-blue{
   --tw-bg-opacity: 1;
   background-color: rgb(68 229 231 / var(--tw-bg-opacity));
+
+.dark .dark\:bg-rhythm{
+  --tw-bg-opacity: 1;
+  background-color: rgb(73 76 111 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:bg-rajah{
@@ -1192,9 +1218,20 @@ a > p{
   color: rgb(43 45 66 / var(--tw-text-opacity));
 }
 
+
 .dark .dark\:hover\:bg-fluorescent-blue:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(68 229 231 / var(--tw-bg-opacity));
+
+.dark .dark\:text-raisen-black{
+  --tw-text-opacity: 1;
+  color: rgb(39 39 39 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-rajah{
+  --tw-text-opacity: 1;
+  color: rgb(245 166 91 / var(--tw-text-opacity));
+
 }
 
 .dark .dark\:hover\:text-rajah:hover{
@@ -1282,6 +1319,7 @@ a > p{
     width: 25%;
   }
 
+
   .md\:justify-center{
     justify-content: center;
   }
@@ -1322,9 +1360,11 @@ a > p{
     padding-left: 2rem;
   }
 
+
   .md\:pt-0{
     padding-top: 0px;
   }
+
 
   .md\:text-left{
     text-align: left;
@@ -1350,6 +1390,7 @@ a > p{
 }
 
 @media (min-width: 1024px){
+
   .lg\:right-0{
     right: 0px;
   }
@@ -1413,12 +1454,16 @@ a > p{
 
   .lg\:pt-0{
     padding-top: 0px;
+
+  .lg\:w-1\/2{
+    width: 50%;
   }
 
   .lg\:text-5xl{
     font-size: 3rem;
     line-height: 1;
   }
+
 
   .lg\:text-xl{
     font-size: 1.25rem;
@@ -1437,5 +1482,6 @@ a > p{
 
   .\32xl\:justify-between{
     justify-content: space-between;
+
   }
 }

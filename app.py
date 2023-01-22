@@ -13,7 +13,6 @@ from sendInvites import sendInvites
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
 app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
@@ -62,7 +61,12 @@ def home():
 
 @app.route('/dashboard/')
 def dashboard():
-    return render_template('dashboard.html')
+
+    pots = Pots.query
+    public_pots = pots.filter_by(isPrivate=False)
+    private_pots = pots.filter_by(isPrivate=True)
+
+    return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
 
 
 @app.route("/signup", methods=["GET", "POST"])
