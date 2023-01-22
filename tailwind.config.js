@@ -7,7 +7,7 @@ module.exports = {
       colors: {
         'fluorescent-blue': '#44E5E7',
         'han-purple': '#552CE9',
-        white: '#ffffff',
+        'white': '#ffffff',
         'raisen-black': '#272727',
         'space-cadet': '#2B2D42',
       },

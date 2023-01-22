@@ -546,12 +546,18 @@ body, p{
   margin: auto;
 }
 
-.mr-2{
-  margin-right: 0.5rem;
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.mr-4{
-  margin-right: 1rem;
+.my-0{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.mr-2{
+  margin-right: 0.5rem;
 }
 
 .mt-\[4rem\]{
@@ -560,6 +566,10 @@ body, p{
 
 .mr-6{
   margin-right: 1.5rem;
+}
+
+.mt-\[2rem\]{
+  margin-top: 2rem;
 }
 
 .block{
@@ -590,10 +600,6 @@ body, p{
   height: 2.5rem;
 }
 
-.h-screen{
-  height: 100vh;
-}
-
 .min-h-screen{
   min-height: 100vh;
 }
@@ -614,8 +620,24 @@ body, p{
   width: 50%;
 }
 
-.w-screen{
-  width: 100vw;
+.w-\[\]{
+  width: ;
+}
+
+.w-\[200px\]{
+  width: 200px;
+}
+
+.w-\[500px\]{
+  width: 500px;
+}
+
+.w-\[80\%\]{
+  width: 80%;
+}
+
+.w-\[70\%\]{
+  width: 70%;
 }
 
 .max-w-4xl{
@@ -624,6 +646,10 @@ body, p{
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.flex-row{
+  flex-direction: row;
 }
 
 .flex-col{
@@ -646,44 +672,26 @@ body, p{
   justify-content: space-between;
 }
 
-.space-x-4 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-\[\] > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc( * var(--tw-space-x-reverse));
-  margin-left: calc( * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-\[10rem\] > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(10rem * var(--tw-space-x-reverse));
-  margin-left: calc(10rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .rounded-lg{
   border-radius: 0.5rem;
-}
-
-.border{
-  border-width: 1px;
 }
 
 .border-2{
   border-width: 2px;
 }
 
+.border{
+  border-width: 1px;
+}
+
+.border-rose-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(244 63 94 / var(--tw-border-opacity));
+}
+
 .border-han-purple{
   --tw-border-opacity: 1;
   border-color: rgb(85 44 233 / var(--tw-border-opacity));
-}
-
-.border-sky-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(14 165 233 / var(--tw-border-opacity));
 }
 
 .border-fluorescent-blue{
@@ -696,6 +704,10 @@ body, p{
   background-color: rgb(85 44 233 / var(--tw-bg-opacity));
 }
 
+.bg-inherit{
+  background-color: inherit;
+}
+
 .bg-gray-700{
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
@@ -704,27 +716,6 @@ body, p{
 .bg-fluorescent-blue{
   --tw-bg-opacity: 1;
   background-color: rgb(68 229 231 / var(--tw-bg-opacity));
-}
-
-.bg-inherit{
-  background-color: inherit;
-}
-
-.bg-\[\]{
-  background-color: ;
-}
-
-.bg-\[\#\]{
-  background-color: #;
-}
-
-.bg-\[\#de3222\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(222 50 34 / var(--tw-bg-opacity));
-}
-
-.p-5{
-  padding: 1.25rem;
 }
 
 .p-1{
@@ -739,28 +730,12 @@ body, p{
   padding: 1rem;
 }
 
+.p-5{
+  padding: 1.25rem;
+}
+
 .p-3{
   padding: 0.75rem;
-}
-
-.px-5{
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.py-5{
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-
-.px-\[\]{
-  padding-left: ;
-  padding-right: ;
-}
-
-.px-\[2rem\]{
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .pt-3{
@@ -769,6 +744,10 @@ body, p{
 
 .pb-3{
   padding-bottom: 0.75rem;
+}
+
+.pb-10{
+  padding-bottom: 2.5rem;
 }
 
 .pt-10{
@@ -866,16 +845,6 @@ body, p{
   outline-offset: 2px;
 }
 
-.dark .dark\:bg-raisen-black{
-  --tw-bg-opacity: 1;
-  background-color: rgb(39 39 39 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-white{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .dark .dark\:bg-space-cadet{
   --tw-bg-opacity: 1;
   background-color: rgb(43 45 66 / var(--tw-bg-opacity));
@@ -885,19 +854,14 @@ body, p{
   background-color: inherit;
 }
 
-.dark .dark\:text-gray-700{
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
+.dark .dark\:bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:text-space-cadet{
   --tw-text-opacity: 1;
   color: rgb(43 45 66 / var(--tw-text-opacity));
-}
-
-.dark .dark\:focus\:ring-gray-700:focus{
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity));
 }
 
 .dark .dark\:focus\:ring-space-cadet:focus{
@@ -906,12 +870,22 @@ body, p{
 }
 
 @media (min-width: 768px){
+  .md\:mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .md\:my-0{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
   .md\:mr-8{
     margin-right: 2rem;
   }
 
-  .md\:mr-7{
-    margin-right: 1.75rem;
+  .md\:mt-\[5rem\]{
+    margin-top: 5rem;
   }
 
   .md\:flex{
@@ -926,44 +900,12 @@ body, p{
     width: 25%;
   }
 
+  .md\:w-\[70\%\]{
+    width: 70%;
+  }
+
   .md\:justify-between{
     justify-content: space-between;
-  }
-
-  .md\:justify-around{
-    justify-content: space-around;
-  }
-
-  .md\:gap-4{
-    gap: 1rem;
-  }
-
-  .md\:gap-2{
-    gap: 0.5rem;
-  }
-
-  .md\:space-x-\[10rem\] > :not([hidden]) ~ :not([hidden]){
-    --tw-space-x-reverse: 0;
-    margin-right: calc(10rem * var(--tw-space-x-reverse));
-    margin-left: calc(10rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .md\:space-x-\[2rem\] > :not([hidden]) ~ :not([hidden]){
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .md\:space-x-8 > :not([hidden]) ~ :not([hidden]){
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .md\:space-x-\[\] > :not([hidden]) ~ :not([hidden]){
-    --tw-space-x-reverse: 0;
-    margin-right: calc( * var(--tw-space-x-reverse));
-    margin-left: calc( * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .md\:space-x-\[3rem\] > :not([hidden]) ~ :not([hidden]){
@@ -984,21 +926,6 @@ body, p{
   .md\:py-5{
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
-  }
-
-  .md\:px-\[20rem\]{
-    padding-left: 20rem;
-    padding-right: 20rem;
-  }
-
-  .md\:px-\[4rem\]{
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-
-  .md\:px-\[rem\]{
-    padding-left: rem;
-    padding-right: rem;
   }
 
   .md\:text-xl{
