@@ -114,6 +114,7 @@ def login():
         if Filtered: # check if user exist
             if Filtered.password == user_pw: # check if password is correct
                 ssn["user"] = Filtered.fName
+                ssn["user_id"] = Filtered.id
                 flash("Welcome, {}".format(Filtered.fName))
                 return redirect(url_for("dashboard"))
         else:
@@ -135,8 +136,16 @@ def logout():
 def create_pot():
     """ Create pot page """
     if request.method == "POST":
-        # Create records in our database
 
+        # Get the current user logged in
+        logged_user = 0
+        if ssn["user_id"]:
+            logged_user = ssn["user_id"]
+            print(logged_user)
+        else:
+            print('no user logged in')
+        
+        # Convert vlue from checkbox to accepted format
         private = True
         formValue = request.form.get('private')
         if formValue in ('y', 'yes', 't', 'true', 'True', 'on', '1'):
@@ -157,6 +166,7 @@ def create_pot():
         peers.append(peer3)
         peers.append(peer4)
 
+        # Create records in our database
         new_pot = Pots(
             title = request.form.get('title'),
             goal = request.form.get('goal'),
@@ -164,6 +174,7 @@ def create_pot():
             cycle = request.form.get('cycle'),
             amount = request.form.get('amount'),
             isPrivate = private,
+            creator_id = logged_user
             # Once the login is completed we can get the logged user id
         )
 
