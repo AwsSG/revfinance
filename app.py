@@ -111,6 +111,14 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out successfully!")
+    ssn.pop("user")
+    return redirect(url_for('home'))
+
+
 @app.route("/createPot", methods=["GET", "POST"])
 def create_pot():
     """ Create pot page """
