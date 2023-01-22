@@ -10,13 +10,13 @@ if os.path.exists("env.py"):
     import env
 
 from sendInvites import sendInvites
-from pots import NewPot
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moneypot.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL")
 app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
+
 
 # Create db model for users table
 class Users(db.Model):
@@ -39,10 +39,14 @@ class Pots(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
     creator = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    peers = db.Column(db.ARRAY(db.JSON))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # String to return name when something is added to database
     def __repr__(self):
-        return '<Name %r>' % self.id
+        return "#{0} - Name: {1} | Creator {2)".format(
+            self.id, self.title, self.creator
+        )
+
 
 @app.route("/")
 def home():
@@ -166,7 +170,6 @@ def create_pot():
 
             # Create new table for single pot
             latest_id = db.session.query(Pots).order_by(Pots.id.desc()).first()
-            NewPot(latest_id,db)
         
         except SQLAlchemyError as e:
             db.session.rollback()
