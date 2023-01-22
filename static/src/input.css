@@ -29,11 +29,17 @@
 
     h3 {
         @apply text-xl;
+        @apply dark:text-baby-powder;
     }
 
     p {
         @apply font-inter;
         @apply text-raisen-black;
+        @apply dark:text-baby-powder;
+    }
+
+    a > p {
+        @apply text-han-purple;
         @apply dark:text-baby-powder;
     }
 }

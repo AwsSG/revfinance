@@ -42,7 +42,7 @@
     <main class="min-h-screen flex flex-col justify-between">
       <div aria-label="content-wrapper">
         <header
-          class="items-center md:px-[2rem] md:py-5 md:flex md:p-7 md:justify-between bg-han-purple dark:bg-space-cadet"
+          class="items-center md:flex md:py-5 md:px-[4rem] md:justify-between bg-han-purple dark:bg-space-cadet"
         >
           <div>
             <i
@@ -57,21 +57,21 @@
             <ul
               class="flex justify-center md:space-x-[3rem] text-white md:text-xl"
             >
-              <li class="hover:text-fluorescent-blue">
+              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('home') }}">Home</a>
               </li>
-              <li class="hover:text-fluorescent-blue">
+              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('dashboard') }}">Money Pots</a>
               </li>
               {% if session.user %}
-              <li class="hover:text-fluorescent-blue">
+              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('logout') }}">Logout</a>
               </li>
               {% else %}
-              <li class="hover:text-fluorescent-blue">
+              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('signup') }}">Register</a>
               </li>
-              <li class="hover:text-fluorescent-blue">
+              <li class="hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('login') }}">Login</a>
               </li>
               {% endif %}
@@ -110,7 +110,7 @@
         </header>
         <!-- flash messages -->
         <section></section>
-        <section class="border-2 border-rose-500 mt-[2rem] md:mt-[5rem] flex flex-col md:w-[70%] md:mx-auto md:my-0">
+        <section class="mt-[2rem] md:mt-[5rem] flex flex-col md:w-[70%] md:mx-auto md:my-0">
           {% block content %} {% endblock %}
         </section>
       </div>
