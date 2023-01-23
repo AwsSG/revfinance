@@ -63,30 +63,15 @@
           class="w-2/3 h-10 border border-fluorescent-blue rounded-lg bg-fluorescent-blue text-trypan-blue hover:text-white cursor-pointer dark:bg-rajah dark:border-rajah dark:text-raisen-black dark:hover:text-white lg:w-1/2"
         />
       </div>
+
+      <div class="p-5 text-center text-xl font-archivo-black text-trypan-blue">
+        {% for mesg in get_flashed_messages() %}
+          <div class="flash-msg">{{ mesg }}</div>
+        {% endfor %}
+      </div>
     </form>
   </div>
 </div>
 
-<!-- This div is to be deleted, it is just to display the users -->
-{% if users == None %}
-<h1>No users</h1>
-{% else %}
-<div>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Password</th>
-    </tr>
-    {% for user in users %}
-    <tr>
-      <td>{{ user.id }}</td>
-      <td>{{ user.fName }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.password }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-{% endif %} {% endblock %}
+
+{% endblock %}
