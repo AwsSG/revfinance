@@ -21,7 +21,7 @@ db = SQLAlchemy(app)
 
 # Association table for users and pots
 user_pots = db.Table('user_pots', 
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('Users.id')),
     db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
     )
 
@@ -48,7 +48,7 @@ class Pots(db.Model):
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     participants = db.Column(db.JSON())
     # String to return name when something is added to database
@@ -74,14 +74,16 @@ def home():
 @app.route('/dashboard/')
 def dashboard():
 
+    pots = Pots.query
+    public_pots = pots.filter_by(isPrivate=False)
+    private_pots = pots.filter_by(isPrivate=True)
+
     # Get the current user logged in
     logged_user = ""
     if "user" in ssn:
         logged_user = ssn["user"]
-
-    pots = Pots.query
-    public_pots = pots.filter_by(isPrivate=False)
-    private_pots = pots.filter_by(isPrivate=True)
+    else:
+        return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
 
     return render_template('dashboard.html', user=logged_user, pots=public_pots, private_pots=private_pots)
 
@@ -205,6 +207,14 @@ def create_pot():
     data = Pots.query
     return render_template("createPot.html", pots=data, exchange_data=exchange_data)
 
+
+@app.route('/pots/<int:id>')
+def pot(id):
+    pot = Pots.query.get_or_404(id)
+    participants = pot.participants.replace("[", "").replace("]", "").replace('"', '')
+    participants = participants.split(',')
+    taken_spots = len(participants)
+    return render_template('pot.html', pot=pot, participants=taken_spots)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
