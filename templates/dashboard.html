@@ -4,38 +4,54 @@
 
     {% if user != None %}
     <h1>Welcome, {{ user }}</h1>
+
+        <!-- Header with the create pot button -->
+        <header class="mb-[3rem]">
+          <p class="p-5 mb-4 text-center text-xl font-bold md:text-left">Create a new pot and invite your friends:</p>
+          <a href="{{ url_for('create_pot') }}" class="bg-fluorescent-blue font-archivo-black hover:text-white dark:bg-rajah rounded px-5 py-4 text-trypan-blue dark:text-raisen-black dark:hover:text-white text-lg font-bold ml-4 transition-opacity hover:opacity-90">Create Pot</a>
+        </header>
+    
+        <!-- Join to a pot -->
+        <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Join an existing pot</h3>
+        <div id="pots-container" class="grid px-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 py-[2rem]">
+    
+          {% for pot in pots %}
+          <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
+            <div class="flex flex-col justify-center">
+              <h5 class="text-[2rem] font-bold text-center mb-4 underline">{{ pot.title }}</h5>
+              <p class="text-center text-xl font-bold my-2">{{ pot.amount }}{{ pot.currency }} {{ pot.cycle }}</p>
+              <p class="text-center text-xl font-bold mb-6">{{ pot.goal }}{{ pot.currency }} by the 10th week</p>
+              <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
+              <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
+              
+              <a href="{{ url_for('createPot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Check it out!</a>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+    
+        <!-- Pots in progress -->
+        <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Ongoing Pots</h3>
+        <div id="pots-container" class="grid grid-cols-5 gap-6 py-[2rem]">
+        </div>
+    
+        <!-- Private pots count -->
+        <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private Pots</h3>
+        <p class="px-5 text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there are {{ private_pots.count() }} private pots live.</p>
+
+
     {% else %}
     <h1>Welcome!</h1>
-    {% endif %}
+    
 
     <!-- Header with the create pot button -->
     <header class="mb-[3rem]">
       <p class="p-5 mb-4 text-center text-xl font-bold md:text-left">Create a new pot and invite your friends:</p>
-      <a href="{{ url_for('create_pot') }}" class="bg-fluorescent-blue font-archivo-black hover:text-white dark:bg-rajah rounded px-5 py-4 text-trypan-blue dark:text-raisen-black dark:hover:text-white text-lg font-bold ml-4 transition-opacity hover:opacity-90">Create Pot</a>
-    </header>
+     </header>
 
     <!-- Join to a pot -->
     <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Join an existing pot</h3>
     <div id="pots-container" class="grid px-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 py-[2rem]">
-      <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
-        <div class="flex flex-col justify-center">
-          <p class="text-center text-xl font-bold my-2">100&#163; weekly</p>
-          <p class="text-center text-xl font-bold mb-6">1000&#163; by the 10th week</p>
-          <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
-          <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
-          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
-        </div>
-      </article>
-
-      <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
-        <div class="flex flex-col justify-center">
-          <p class="text-center text-xl font-bold my-2">100&#163; weekly</p>
-          <p class="text-center text-xl font-bold mb-6">1000&#163; by the 10th week</p>
-          <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
-          <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
-          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
-        </div>
-      </article>
 
       {% for pot in pots %}
       <article class="rounded dark:bg-rhythm shadow-pot-card p-4">
@@ -45,7 +61,8 @@
           <p class="text-center text-xl font-bold mb-6">{{ pot.goal }}{{ pot.currency }} by the 10th week</p>
           <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
           <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
-          <a href="{{ url_for('create_pot') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Join Pot</a>
+
+          <a href="{{ url_for('/signup') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Register to join!</a>
         </div>
       </article>
       {% endfor %}
@@ -59,4 +76,6 @@
     <!-- Private pots count -->
     <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private Pots</h3>
     <p class="px-5 text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there are {{ private_pots.count() }} private pots live.</p>
+
+    {% endif %}
 {% endblock %}
