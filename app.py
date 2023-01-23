@@ -22,7 +22,7 @@ db = SQLAlchemy(app)
 # Association table for users and pots
 user_pots = db.Table('user_pots', 
     db.Column('user_id', db.Integer, db.ForeignKey('Users.id')),
-    db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
+    db.Column('pot_id', db.Integer, db.ForeignKey('Pots.id'))
     )
 
 
