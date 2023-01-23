@@ -21,8 +21,8 @@ db = SQLAlchemy(app)
 
 # Association table for users and pots
 user_pots = db.Table('user_pots', 
-    db.Column('user_id', db.Integer, db.ForeignKey('Users.id')),
-    db.Column('pot_id', db.Integer, db.ForeignKey('Pots.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
     )
 
 
@@ -33,7 +33,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    joined_pots = db.Column(db.Integer, db.ForeignKey('Pots.id'))
+    joined_pots = db.Column(db.Integer, db.ForeignKey('pots.id'))
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -48,7 +48,7 @@ class Pots(db.Model):
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     participants = db.Column(db.JSON())
     # String to return name when something is added to database
@@ -82,8 +82,6 @@ def dashboard():
     logged_user = ""
     if "user" in ssn:
         logged_user = ssn["user"]
-    else:
-        return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
 
     return render_template('dashboard.html', user=logged_user, pots=public_pots, private_pots=private_pots)
 
@@ -116,7 +114,6 @@ def signup():
         try:
             db.session.add(new_user)
             db.session.commit()
-            flash("You have signed up successfully!")
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
@@ -138,9 +135,11 @@ def login():
                 ssn["user"] = Filtered.fName
                 ssn["user_id"] = Filtered.id
                 flash("Welcome, {}".format(Filtered.fName))
+                print("Correct")
                 return redirect(url_for("dashboard"))
         else:
             flash("Incorrect username and/or password")
+            print("Incorrect username and/or password")
             return redirect(url_for("login"))
 
     return render_template("login.html")
@@ -198,7 +197,6 @@ def create_pot():
             db.session.add(new_pot)
             db.session.commit()
             sendInvites(invite)
-            flash("Pot added successfylly.")
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
