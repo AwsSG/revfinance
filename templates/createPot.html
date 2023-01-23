@@ -6,7 +6,6 @@
 
         <h1 class="mt-2 block">Create a new pot!</h1>
         <h2 class="p-5 text-center">Start your own money pot.</h2>
-
     
         <form id="createPot" action="createPot" method="POST">
             <p id="errorMsg"></p>
@@ -60,7 +59,6 @@
                 <button id="addToInvite" type="button" class="mt-1 text-trypan-blue font-archivo-black hover:text-fluorescent-blue dark:text-rajah dark:hover:text-baby-powder">Add to invite list</button>
             </div>
 
-
             <div class="p-4 text-center text-l sm:text-xl font-archivo-black">
                 <input type="submit" value="Create new Pot" class="px-2 sm:w-5/6 h-10 border border-fluorescent-blue rounded-lg bg-fluorescent-blue text-trypan-blue hover:text-white cursor-pointer dark:bg-rajah dark:border-rajah dark:text-raisen-black dark:hover:text-white lg:w-1/2">
             </div>
@@ -71,7 +69,16 @@
                 {% endfor %}
             </div>
         </form>
+        
+        <!-- API exchange rates -->
+        <h5>Exchange Rates:</h5>
+        <p>USD: {{exchange_data.rates.USD}}</p>
+        <p>GBP: {{exchange_data.rates.GBP}}</p>
+        <p>AUD: {{exchange_data.rates.AUD}}</p>
+        <p>CAD: {{exchange_data.rates.CAD}}</p>
+
     </div>
 </div>
+
 
 {% endblock %}
