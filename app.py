@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 import requests
+import json
 
 if os.path.exists("env.py"):
     import env
@@ -158,8 +159,6 @@ def create_pot():
     """ Create pot page """
     if request.method == "POST":
 
-        print(request.form.get('invited'))
-
         # Get the current user logged in
         logged_user = 0
         if "user_id" in ssn:
@@ -175,16 +174,11 @@ def create_pot():
         else:
             raise ValueError("invalid truth value %r" % (formValue,))
 
-        peers = [
-            "testemail@gmail.com",
-            "tim@gmail.com"
-        ]
+        peers = request.form.get('invited')
+        invite = peers.replace("[", "").replace("]", "").replace('"', '')
+        invite = invite.split(',')
+        print(invite)
 
-        """
-        peers.append(peer1)
-        peers.append(peer2)
-        peers.append(peer3)
-        peers.append(peer4)"""
 
         # Create records in our database
         new_pot = Pots(
@@ -194,15 +188,15 @@ def create_pot():
             cycle = request.form.get('cycle'),
             amount = request.form.get('amount'),
             isPrivate = private,
-            creator_id = logged_user
-            # Once the login is completed we can get the logged user id
+            creator_id = logged_user,
+            participants = peers
         )
 
         # Add each instance into the database
         try:
             db.session.add(new_pot)
             db.session.commit()
-            sendInvites(peers)
+            sendInvites(invite)
             # We can redirect to index if we want to
             # return redirect('/dashboard')
         except SQLAlchemyError as e:
