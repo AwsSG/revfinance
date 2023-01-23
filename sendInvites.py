@@ -24,4 +24,3 @@ def sendInvites(peersArray):
             with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
                 smtp.login(email_sender, email_password)
                 smtp.sendmail(email_sender, peer, msg.as_string())
-

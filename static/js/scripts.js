@@ -70,29 +70,32 @@ $(document).ready(function(){
         }
     })
 
-    inviteList = []
+ 
+    $('#addToInvite').attr("disabled", true)
 
-    $('#invite').val().change( () => {
+    $('#invite').on('input', () => {
 
-        if(this.length == 0) {
-            $('#addToInvite').attr("disabled", false)
-        } else {
+        if($('#invite').val().length == 0) {
             $('#addToInvite').attr("disabled", true)
+        } else {
+            $('#addToInvite').attr("disabled", false)
         }
     })
     
 
     /* Add list item button */
     $('#addToInvite').click( () => {
-
+        const errorField = $('#errorMsg')
+        display = $('.inviteList')
         peerId = 0
         peerEmail = $('#invite').val()
         
         if( validateEmail(peerEmail) ) { 
             $('#addToInvite').attr("disabled", false)
-            inviteList.push(peerEmail)
-            displayAddedEmails()
+            display.append(`<span class="invited"><button class="withdrawInvite" type="button">X</button><p>${peerEmail}</p></span>`)
             $('#invite').val('')
+        } else {
+            errorField.html('Please, enter  avalid email address')
         }
         /* Remove list item button */
         $('.withdrawInvite').on("click", withdrawInvite)
@@ -100,20 +103,9 @@ $(document).ready(function(){
 
     /* Delete list item */
     function withdrawInvite() {
-        peerId = $(this).attr('data-id')
-        inviteList.splice(peerId,1)
-        displayAddedEmails()
+        $(this).parent().remove();
     }
-
-    /* Display added items */
-    function displayAddedEmails() {
-        display = $('.inviteList')
-        display.html("")
-        for(invite of inviteList) {
-            display.append(`<span class="list-item"><button class="withdrawInvite" data-id="${inviteList.indexOf(invite)}" type="button">X</button><p>${invite}</p></span>`)
-        }
-    } 
-
+ 
 });
 
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');

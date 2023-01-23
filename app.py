@@ -166,7 +166,11 @@ def create_pot():
         peer3 = request.form.get('peer3')
         peer4 = request.form.get('peer4')
 
-        peers = []
+        peers = [
+            "testemail@gmail.com",
+            "tim@gmail.com"
+        ]
+
         """
         peers.append(peer1)
         peers.append(peer2)
