@@ -21,8 +21,8 @@ db = SQLAlchemy(app)
 
 # Association table for users and pots
 user_pots = db.Table('user_pots', 
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('Users.id')),
+    db.Column('pot_id', db.Integer, db.ForeignKey('Pots.id'))
     )
 
 
@@ -33,7 +33,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    joined_pots = db.Column(db.Integer, db.ForeignKey('pots.id'))
+    joined_pots = db.Column(db.Integer, db.ForeignKey('Pots.id'))
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -48,7 +48,7 @@ class Pots(db.Model):
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     participants = db.Column(db.JSON())
     # String to return name when something is added to database
@@ -74,14 +74,16 @@ def home():
 @app.route('/dashboard/')
 def dashboard():
 
+    pots = Pots.query
+    public_pots = pots.filter_by(isPrivate=False)
+    private_pots = pots.filter_by(isPrivate=True)
+
     # Get the current user logged in
     logged_user = ""
     if "user" in ssn:
         logged_user = ssn["user"]
-
-    pots = Pots.query
-    public_pots = pots.filter_by(isPrivate=False)
-    private_pots = pots.filter_by(isPrivate=True)
+    else:
+        return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
 
     return render_template('dashboard.html', user=logged_user, pots=public_pots, private_pots=private_pots)
 

@@ -193,7 +193,8 @@ RevFinance
 
 * White color is used as a neutral background color, which makes it easy to read the text on the website and it creates a clean and professional look and feel. It also gives an open, spacious feeling to the website design, making it easy to navigate.
 
-![Colour Scheme for the Website](documentation/design/colorpallette-revfinance.jpg)
+![Colour Scheme for the Website - Light Mode](documentation/design/lightmode-color.jpg) 
+![Colour Scheme for the Website - Dark Mode](documentation/design/darkmode-colors.jpg)
 
 ### Typography:
 
