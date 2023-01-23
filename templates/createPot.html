@@ -68,6 +68,11 @@
 </div>
 
 <!-- This div is to be deleted, it is just to display the users -->
+<h5>Exchange data:</h5>
+<p>USD: {{exchange_data.rates.USD}}</p>
+<p>GBP: {{exchange_data.rates.GBP}}</p>
+<p>AUD: {{exchange_data.rates.AUD}}</p>
+<p>CAD: {{exchange_data.rates.CAD}}</p>
 {% if pots == None %}
 <h1>No pots yet</h1>
 {% else %}
