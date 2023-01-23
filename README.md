@@ -51,7 +51,7 @@ For faster development, npm script has been added. Run command:
 
 RevFinance was developed as part of the January 2023 Hackathon: New Years Revolutions: Revolutionising finance for 2023! Presented by Code Institute.
 
-## Team Name: <<team_name>>
+## Team Name: Loan Sharks
 
 [View Deployed Project Here](https://moneypot.onrender.com)
 
