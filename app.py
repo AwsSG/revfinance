@@ -32,8 +32,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    created_pots = db.relationship('Pots', backref='creator')
-    all_pots = db.relationship('Pots', secondary=user_pots, backref='all_participants')
+    joined_pots = db.Column(db.Integer, db.ForeignKey('pots.id'))
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -73,11 +72,16 @@ def home():
 @app.route('/dashboard/')
 def dashboard():
 
+    # Get the current user logged in
+    logged_user = ""
+    if "user" in ssn:
+        logged_user = ssn["user"]
+
     pots = Pots.query
     public_pots = pots.filter_by(isPrivate=False)
     private_pots = pots.filter_by(isPrivate=True)
 
-    return render_template('dashboard.html', pots=public_pots, private_pots=private_pots)
+    return render_template('dashboard.html', user=logged_user, pots=public_pots, private_pots=private_pots)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -155,11 +159,8 @@ def create_pot():
 
         # Get the current user logged in
         logged_user = 0
-        if ssn["user_id"]:
+        if "user_id" in ssn:
             logged_user = ssn["user_id"]
-            print(logged_user)
-        else:
-            print('no user logged in')
         
         # Convert vlue from checkbox to accepted format
         private = True
@@ -176,11 +177,16 @@ def create_pot():
         peer3 = request.form.get('peer3')
         peer4 = request.form.get('peer4')
 
-        peers = []
+        peers = [
+            "testemail@gmail.com",
+            "tim@gmail.com"
+        ]
+
+        """
         peers.append(peer1)
         peers.append(peer2)
         peers.append(peer3)
-        peers.append(peer4)
+        peers.append(peer4)"""
 
         # Create records in our database
         new_pot = Pots(

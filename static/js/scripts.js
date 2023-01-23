@@ -69,6 +69,43 @@ $(document).ready(function(){
             errorField.html(errors.join('<br>'))
         }
     })
+
+ 
+    $('#addToInvite').attr("disabled", true)
+
+    $('#invite').on('input', () => {
+
+        if($('#invite').val().length == 0) {
+            $('#addToInvite').attr("disabled", true)
+        } else {
+            $('#addToInvite').attr("disabled", false)
+        }
+    })
+    
+
+    /* Add list item button */
+    $('#addToInvite').click( () => {
+        const errorField = $('#errorMsg')
+        display = $('.inviteList')
+        peerId = 0
+        peerEmail = $('#invite').val()
+        
+        if( validateEmail(peerEmail) && $('#invite').val() != 0) { 
+            $('#addToInvite').attr("disabled", false)
+            display.append(`<span class="invited" style="display:block"><button class="withdrawInvite" type="button" style="padding:0 10px"> X  </button><p style="display:inline">${peerEmail}</p></span>`)
+            $('#invite').val('')
+        } else {
+            errorField.html('Please, enter  avalid email address')
+        }
+        /* Remove list item button */
+        $('.withdrawInvite').on("click", withdrawInvite)
+    });
+
+    /* Delete list item */
+    function withdrawInvite() {
+        $(this).parent().remove();
+    }
+ 
 });
 
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -118,3 +155,9 @@ function myFunction() {
       x.style.display = "block";
     }
   }
+
+  /* Validate email */
+function validateEmail(email) {
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test( email );
+    }
