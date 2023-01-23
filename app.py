@@ -4,6 +4,7 @@ from flask import session as ssn
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
+import requests
 
 if os.path.exists("env.py"):
     import env
@@ -52,6 +53,16 @@ class Pots(db.Model):
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
+
+# exchange rates api API 
+url = 'http://api.exchangeratesapi.io/v1/latest?access_key=1896b2be48dacf88b405e92f6d2136fe&symbols=USD,GBP,AUD,CAD'
+response = requests.get(url)
+exchange_data = response.json()
+
+# api call example result:
+# {'success': True, 'timestamp': 1674413344, 'base': 'EUR', 'date': '2023-01-22', 'rates': {'USD': 1.087725, 'GBP': 0.877976, 'AUD': 1.560825, 'CAD': 1.456436}}
+
+
 
 @app.route("/")
 def home():
@@ -196,7 +207,7 @@ def create_pot():
             print(error)
 
     data = Pots.query
-    return render_template("createPot.html", pots=data)
+    return render_template("createPot.html", pots=data, exchange_data=exchange_data)
 
 
 if __name__ == "__main__":
