@@ -51,7 +51,7 @@ For faster development, npm script has been added. Run command:
 
 RevFinance was developed as part of the January 2023 Hackathon: New Years Revolutions: Revolutionising finance for 2023! Presented by Code Institute.
 
-## Team Name: <<team_name>>
+## Team Name: Loan Sharks
 
 [View Deployed Project Here](https://moneypot.onrender.com)
 
@@ -135,79 +135,100 @@ As a registered user:
 
 ## Technology:
 
-<< Detail your techstack here, and why you chose it. >>
+*  Languages:
 
-<< list your languages & tools below: >>
-
-*  Languages
-
-	* << list the langauge & reason for using it >>
     * HTML - Implemented as markdown language
     * CSS - Implemented to add style and layout of the website.
     * JavaScript - Implemented to add interactivity and secutiry. 
     * Python - 
 
-* Frameworks, Libraries & Programs Used.
+* Frameworks, Libraries & Programs Used:
 
-  * Tailwind - user as a CSS framework to add style and layout.
-  * Flask - 
-  * Balsamic - used to generate wireframes.
-  * Git - was used for the version control of the website.
-  * GitHub - was used to host the code of the website.
-  * Chrome DevTools - used to debug the website. 
+  * [Tailwind](https://tailwindcss.com/) - user as a CSS framework to add style and layout.
+  * [Flask](https://flask.palletsprojects.com/en/2.2.x/) - Foundation of the site.
+  * [Balsamic](https://balsamiq.com/) - used to generate wireframes.
+  * [Git](https://git-scm.com/) - was used for the version control of the website.
+  * [GitHub](https://github.com/) - was used to host the code of the website.
+  * [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/) - used to debug the website. 
+  * [Am I Responsive?](http://ami.responsivedesign.is/) - To show the app on various devices.
+  * [Render](https://render.com/) - To deploy our website.
 
 ## Initial MVP idea:
 
-Detail plans and scope of project here....
+* Initial Ideas:
+   
+   1. Exchange different rates solutions for people travelling/investing/spending in different countries. For example, the app could suggest a good time to travel if the current exchange rate is low.
 
-<< consider talking about how you planned as a team here and what tools were implemented >>
+   2. Social lending platform where a group of people could put money into the pot towards a similar "goal" / plan. For example, if one plan for holidays but cannot afford it now, one could pay 100 pounds every week/fortnight to the pot with 5 - 10 other people and collect the needed amount for the trip. The goal would be to save money for everyone paying into that pot to achieve a similar goal.
+
+   3. Money spending app where the user could track/monitor their spending and add money spent to a specific category. Money spending prediction for the current month and then the app could show how much money we saved or went over.
 
 ### Actual idea & content:
 
-<< how does you final product/project match up to your initial mvp plans >>
+RevFinance
 
-<< detail idea / features / functionality here >>
+1. As a team, we would start by defining the scope and goals of the project, and creating a detailed project plan that outlines the tasks (GitHub task assignment) that need to be completed in order to bring the RevFinance platform to fruition. This plan would be divided into different phases, research and planning, design and development, testing and quality assurance, and deployment.
+
+2. In the research and planning phase, we would conduct user research to understand the needs of our target audience and figure out how could we connect an API to improve user experience. We would also create user personas and user stories to guide the design and development process.
+
+3. In the design and development phase, we would use tools such as Balsamiq for wireframes and Tailwid to design the user interface and user experience of the platform. We would then use technologies such as HTML, CSS, JavaScript, and a framework such as Node.js to integrate Tailwind with our platform.
+
+4. In the testing and quality assurance phase, we would use a variety of tools to test and validate the platform, including manual testing. We would also conduct accessibility testing to ensure that the platform is usable for people with disabilities.
+
+5. In the deployment, we would deploy the platform to a production environment (Render), and monitor its performance and user engagement. We would also implement a process for tracking and addressing bugs and other issues that arise, and make updates and improvements to the platform as needed.
+
+6. During the project, we would use GitHub Issues and use communication tools like Slack to manage the project and collaborate effectively as a team. As we proceed, we will also use version control tools like Git to keep track of the changes made to the codebase.
+
+*  The initial sketches and plans for the project align well with the final product. The sketches and plans likely included the overall layout and design of the platform, as well as key features such as the ability to create and manage money pots, track progress, join or invite others to join, and see the list of people who joined the money pots.
+
+* Overall, the initial sketches and plans provided a solid foundation for the development of the RevFinance platform and were refined and iterated on throughout the development process.
 
 ## Design
 
 ### Color Scheme:
-<< detail your color palette here >>
+
+* Han blue is a traditional Chinese color that symbolizes stability and trust. This color can evoke feelings of reliability and security, which are important for a financial platform like RevFinance where users are entrusting their money.
+
+* Fluorescent blue is a bright and vibrant color that can create a sense of energy and excitement. This color can be used to create a sense of urgency and encourage users to take action, which can be beneficial when it comes to encouraging users to save money and reach their financial goals.
+
+* White color is used as a neutral background color, which makes it easy to read the text on the website and it creates a clean and professional look and feel. It also gives an open, spacious feeling to the website design, making it easy to navigate.
+
+![Colour Scheme for the Website](documentation/design/colorpallette-revfinance.jpg)
 
 ### Typography:
-<< what font pairings did your team consider and pick? And why? >>
 
-### Imagery:
-<< Detail imagery used to compliment your build & theme >>
 
-<< ensure source attribution is maintained, and that you have used copyright free material >>
+![NavBar Links](documentation/design/Inter-font.jpg)
 
-### Wireframes:
+* Inter font was specifically chosen for the website's navigation bar because it is a versatile and minimalist font that is designed for digital screens. Its clear and legible design can help to create a sense of elegance, professionalism, and consistency in the navigation bar, making it easy for users to navigate the website and access the features they need. It also helps in creating a sense of simplicity and ease of use.
 
-<details>
-<summary>- Mobile Wireframes:</summary>
+![Main Font](documentation/design/Archivoblack-font.jpg)
 
-<< put all your mobile wireframes here... >>
+* Archivo Black is a geometric sans-serif font that is designed to be used in headings and titles, it is strong and bold, it can help to create a sense of hierarchy and importance. This font is perfect for highlighting important information, such as the title of money pots, the name of the user who created it and the amount of money raised.
 
-<< consider adding some notes to detail the planned components or functionality >>
+### Imagery
 
-</details>
+### Wireframes
 
-<details>
-<summary>- Desktop Wireframes:</summary>
+Desktop Wireframes
 
-<< put all your mobile wireframes here... >>
+![Landing Page](documentation/wireframes/Landing.png)
+![Login](documentation/wireframes/login.png)
+![Register](documentation/wireframes/register.png)
+![Dashboard](documentation/wireframes/user%20dashboard.png)
+![Create Pot](documentation/wireframes/Create%20a%20pot.png)
+![View Pot](documentation/wireframes/view%20pot.png)
+![Edit Pot](documentation/wireframes/edit%20pot.png)
 
-<< consider adding some notes to detail the planned components or functionality >>
-
-</details>
+- - - 
 
 ## Deployment
-<< detail deployment methods used here, and any extraneous circumstances to run the project locally >>
+
+- The app was deployed to [Render](https://render.com/).
 
 ## Testing
-<< detail testing logs here - any known bugs, and squashed bugs 🐛🐛 >>
 
-
+[Click Here](TESTING.md) to view the full testing procedure.
 
 ## Credits
 
@@ -221,5 +242,7 @@ Detail plans and scope of project here....
 << you may have already done this above in the Imagery section, but just in case, please attribute Media acquisition here >>
 
 ### Acknowledgements
-<< personal thanks and praise 🙌 >>
+
+* [Anthony O'Brien](https://github.com/auxfuse), our project facilitator.
+* [CODE INSTITUTE](https://codeinstitute.net/), our event organizer.
 
