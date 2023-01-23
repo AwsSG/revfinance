@@ -35,7 +35,7 @@
     h5 {
         @apply font-archivo-black;
         @apply text-xl;
-        @apply text-han-purple;
+        @apply text-trypan-blue;
         @apply dark:text-rajah;
     }
 
@@ -47,7 +47,6 @@
 
     article > div > p:nth-child(4), article > div > p:nth-child(5) {
         @apply text-trypan-blue;
-
         @apply dark:text-rajah;
     }
 }
