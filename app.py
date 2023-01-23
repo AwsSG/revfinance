@@ -114,8 +114,7 @@ def signup():
         try:
             db.session.add(new_user)
             db.session.commit()
-            # We can redirect to index if we want to
-            # return redirect('/dashboard')
+            flash("You have signed up successfully!")
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
@@ -197,8 +196,7 @@ def create_pot():
             db.session.add(new_pot)
             db.session.commit()
             sendInvites(invite)
-            # We can redirect to index if we want to
-            # return redirect('/dashboard')
+            flash("Pot added successfylly.")
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])

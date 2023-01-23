@@ -28,6 +28,12 @@
 
         </form>
 
+        <div class="p-5 text-center text-xl font-archivo-black text-trypan-blue">
+            {% for mesg in get_flashed_messages() %}
+              <div class="flash-msg">{{ mesg }}</div>
+            {% endfor %}
+        </div>
+
     </div>
 
 </div>
