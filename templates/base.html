@@ -55,11 +55,11 @@
               <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('home') }}">Home</a>
               </li>
-              {% if session.user %}
+              
               <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('dashboard') }}">Money Pots</a>
               </li>
-              
+              {% if session.user %}
               <li class="p-1 lg:p-0 hover:text-fluorescent-blue dark:hover:text-rajah">
                 <a href="{{ url_for('logout') }}">Logout</a>
               </li>
