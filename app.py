@@ -49,6 +49,7 @@ class Pots(db.Model):
     isPrivate = db.Column(db.Boolean, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    participants = db.Column(db.JSON())
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -157,6 +158,8 @@ def create_pot():
     """ Create pot page """
     if request.method == "POST":
 
+        print(request.form.get('invited'))
+
         # Get the current user logged in
         logged_user = 0
         if "user_id" in ssn:
@@ -171,11 +174,6 @@ def create_pot():
             private = False
         else:
             raise ValueError("invalid truth value %r" % (formValue,))
-
-        peer1 = request.form.get('peer1')
-        peer2 = request.form.get('peer2')
-        peer3 = request.form.get('peer3')
-        peer4 = request.form.get('peer4')
 
         peers = [
             "testemail@gmail.com",
