@@ -16,24 +16,37 @@
     h1 {
         @apply font-archivo-black;
         @apply text-4xl;
-        @apply text-han-purple;
+        @apply text-trypan-blue;
         @apply dark:text-rajah;
         @apply text-center;
     }
     h2, h3 {
         @apply font-archivo-black;
         @apply text-2xl;
-        @apply text-han-purple;
+        @apply text-trypan-blue;
         @apply dark:text-rajah;
     }
 
     h3 {
         @apply text-xl;
+        @apply dark:text-baby-powder;
+    }
+
+    h5 {
+        @apply font-archivo-black;
+        @apply text-xl;
+        @apply text-trypan-blue;
+        @apply dark:text-rajah;
     }
 
     p {
         @apply font-inter;
         @apply text-raisen-black;
-        @apply text-baby-powder;
+        @apply dark:text-baby-powder;
+    }
+
+    article > div > p:nth-child(4), article > div > p:nth-child(5) {
+        @apply text-trypan-blue;
+        @apply dark:text-rajah;
     }
 }

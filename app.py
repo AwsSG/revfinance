@@ -4,6 +4,8 @@ from flask import session as ssn
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
+import requests
+import json
 
 if os.path.exists("env.py"):
     import env
@@ -17,6 +19,13 @@ app.secret_key = os.environ.get("SECRET_KEY")
 # Initialize database
 db = SQLAlchemy(app)
 
+# Association table for users and pots
+user_pots = db.Table('user_pots', 
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
+    )
+
+
 # Create db model for users table
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,6 +33,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
+    joined_pots = db.Column(db.Integer, db.ForeignKey('pots.id'))
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -34,13 +44,26 @@ class Pots(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     goal = db.Column(db.Integer, nullable=False)
+    currency = db.Column(db.String(50), nullable=False)
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    participants = db.Column(db.JSON())
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
+
+# exchange rates api API 
+url = 'http://api.exchangeratesapi.io/v1/latest?access_key=1896b2be48dacf88b405e92f6d2136fe&symbols=USD,GBP,AUD,CAD'
+response = requests.get(url)
+exchange_data = response.json()
+
+# api call example result:
+# {'success': True, 'timestamp': 1674413344, 'base': 'EUR', 'date': '2023-01-22', 'rates': {'USD': 1.087725, 'GBP': 0.877976, 'AUD': 1.560825, 'CAD': 1.456436}}
+
+
 
 @app.route("/")
 def home():
@@ -50,7 +73,17 @@ def home():
 
 @app.route('/dashboard/')
 def dashboard():
-    return render_template('dashboard.html')
+
+    # Get the current user logged in
+    logged_user = ""
+    if "user" in ssn:
+        logged_user = ssn["user"]
+
+    pots = Pots.query
+    public_pots = pots.filter_by(isPrivate=False)
+    private_pots = pots.filter_by(isPrivate=True)
+
+    return render_template('dashboard.html', user=logged_user, pots=public_pots, private_pots=private_pots)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -81,8 +114,7 @@ def signup():
         try:
             db.session.add(new_user)
             db.session.commit()
-            # We can redirect to index if we want to
-            # return redirect('/dashboard')
+            flash("You have signed up successfully!")
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
@@ -102,6 +134,7 @@ def login():
         if Filtered: # check if user exist
             if Filtered.password == user_pw: # check if password is correct
                 ssn["user"] = Filtered.fName
+                ssn["user_id"] = Filtered.id
                 flash("Welcome, {}".format(Filtered.fName))
                 return redirect(url_for("dashboard"))
         else:
@@ -116,6 +149,7 @@ def logout():
     # remove user from session cookie
     flash("You have been logged out successfully!")
     ssn.pop("user")
+    ssn.pop("user_id")
     return redirect(url_for('home'))
 
 
@@ -123,8 +157,13 @@ def logout():
 def create_pot():
     """ Create pot page """
     if request.method == "POST":
-        # Create records in our database
 
+        # Get the current user logged in
+        logged_user = 0
+        if "user_id" in ssn:
+            logged_user = ssn["user_id"]
+        
+        # Convert vlue from checkbox to accepted format
         private = True
         formValue = request.form.get('private')
         if formValue in ('y', 'yes', 't', 'true', 'True', 'on', '1'):
@@ -134,42 +173,37 @@ def create_pot():
         else:
             raise ValueError("invalid truth value %r" % (formValue,))
 
+        peers = request.form.get('invited')
+        invite = peers.replace("[", "").replace("]", "").replace('"', '')
+        invite = invite.split(',')
+        print(invite)
+
+
+        # Create records in our database
         new_pot = Pots(
             title = request.form.get('title'),
             goal = request.form.get('goal'),
+            currency = request.form.get('currency'),
             cycle = request.form.get('cycle'),
             amount = request.form.get('amount'),
             isPrivate = private,
-            # Once the login is completed we can get the logged user id
-            creator = 1
+            creator_id = logged_user,
+            participants = peers
         )
-
-        peer1 = request.form.get('peer1')
-        peer2 = request.form.get('peer2')
-        peer3 = request.form.get('peer3')
-        peer4 = request.form.get('peer4')
-
-        peers = []
-        peers.append(peer1)
-        peers.append(peer2)
-        peers.append(peer3)
-        peers.append(peer4)
-
 
         # Add each instance into the database
         try:
             db.session.add(new_pot)
             db.session.commit()
-            sendInvites(peers)
-            # We can redirect to index if we want to
-            # return redirect('/dashboard')
+            sendInvites(invite)
+            flash("Pot added successfylly.")
         except SQLAlchemyError as e:
             db.session.rollback()
             error = str(e.__dict__['orig'])
             print(error)
 
     data = Pots.query
-    return render_template("createPot.html", pots=data)
+    return render_template("createPot.html", pots=data, exchange_data=exchange_data)
 
 
 if __name__ == "__main__":

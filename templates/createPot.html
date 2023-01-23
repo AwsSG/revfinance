@@ -1,68 +1,84 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="form">
+<div class="flex pb-20">
+    <div class="form w-5/6 p-4 m-auto border-2 rounded-lg border-trypan-blue shadow-2xl shadow-trypan-blue/50 dark:border-rajah dark:shadow-rajah/50 md:w-2/3 2xl:w-1/3">
 
-    <form id="createPot" action="createPot" method="POST">
-        <p id="errorMsg"></p>
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title"><br>
-        <label for="goal">Goal Amount:</label><br>
-        <input type="number" id="goal" name="goal"><br>
-        <label for="cycle">Payment Cycle:</label><br>
-        <select name="cycle" id="cycle">
-            <option value="weekly">Weekly</option>
-            <option value="Bi-weekly">Bi-Weekly</option>
-            <option value="Monthly">Monthly</option>
-        </select><br>
-        <label for="amount">Recurrent payment amount:</label><br>
-        <input type="number" id="amount" name="amount"><br>
-        <input type="checkbox" id="private" name="private" value="True" checked>
-        <label for="private"> Private </label><br>
+        <h1 class="mt-2 block">Create a new pot!</h1>
+        <h2 class="p-5 text-center">Start your own money pot.</h2>
 
-        <label for="peer1">Peer 1:</label><br>
-        <input type="email" id="peer1" name="peer1"><br>
-        <label for="peer2">Peer 2:</label><br>
-        <input type="email" id="peer2" name="peer2"><br>
-        <label for="peer3">Peer 3:</label><br>
-        <input type="email" id="peer3" name="peer3"><br>
-        <label for="peer4">Peer 1:</label><br>
-        <input type="email" id="peer4" name="peer4"><br>
+    
+        <form id="createPot" action="createPot" method="POST">
+            <p id="errorMsg"></p>
 
-        <input type="submit" value="Create new Pot">
+            <div class="p-3">
+                <label for="title" class="dark:text-baby-powder">Title:</label><br>
+                <input type="text" id="title" name="title"
+                class="w-full h-10 mt-1 pl-5 border rounded-lg border-trypan-blue dark:border-none"><br>
+            </div>
 
-    </form>
+            <div class="p-3">
+                <label for="goal" class="dark:text-baby-powder">Goal Amount:</label><br>
+                <input type="number" id="goal" name="goal"
+                class="w-full h-10 mt-1 pl-5 border rounded-lg border-trypan-blue dark:border-none"><br>
+            </div>
+            
+            <div class="p-3">
+                <label for="currency" class="dark:text-baby-powder">Currency</label><br>
+                <select name="currency" id="currency"
+                class="w-full h-10 mt-1 pl-5 border rounded-lg border-trypan-blue dark:border-none">
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="USD">USD</option>
+                </select><br>
+            </div>
+
+            <div class="p-3">
+                <label for="cycle" class="dark:text-baby-powder">Payment Cycle:</label><br>
+                <select name="cycle" id="cycle"
+                class="w-full h-10 pl-5 border rounded-lg border-trypan-blue dark:border-none">
+                    <option value="weekly">Weekly</option>
+                    <option value="Bi-weekly">Bi-Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                </select><br>
+            </div>
+
+            <div class="p-3">
+                <label for="amount" class="dark:text-baby-powder">Recurrent Payment Amount:</label><br>
+                <input type="number" id="amount" name="amount"
+                class="w-full h-10 mt-1 pl-5 border rounded-lg border-trypan-blue dark:border-none"><br>
+                <input type="checkbox" id="private" name="private" value="True" checked>
+                <label for="private" class="dark:text-baby-powder"> Private </label><br>
+            </div>
+
+            <div class="p-3">
+                <input type="hidden" id="invited" name="invited" value="">
+                <label for="invite" class="dark:text-baby-powder">Invite:</label><br>
+                <div class="inviteList"></div>
+                <input type="email" id="invite" name="invite" class="w-full h-10 mt-1 pl-5 border rounded-lg border-trypan-blue dark:border-none"
+                placeholder="Please, enter an email address">
+                <button id="addToInvite" type="button" class="mt-1 text-trypan-blue font-archivo-black hover:text-fluorescent-blue dark:text-rajah dark:hover:text-baby-powder">Add to invite list</button>
+            </div>
+
+
+            <div class="p-5 text-center text-xl font-archivo-black">
+                <input type="submit" value="Create new Pot" class="w-5/6 h-10 border border-fluorescent-blue rounded-lg bg-fluorescent-blue text-trypan-blue hover:text-white cursor-pointer dark:bg-rajah dark:border-rajah dark:text-raisen-black dark:hover:text-white lg:w-1/2">
+            </div>
+
+            <div class="p-5 text-center text-xl font-archivo-black text-trypan-blue">
+                {% for mesg in get_flashed_messages() %}
+                  <div class="flash-msg">{{ mesg }}</div>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
 </div>
 
 <!-- This div is to be deleted, it is just to display the users -->
-{% if pots == None %}
-<h1>No pots yet</h1>
-{% else %}
-<div>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Goal</th>
-            <th>Cycle</th>
-            <th>Amount</th>
-            <th>Private</th>
-            <th>Creator</th>
-        </tr>
-    {% for pot in pots %}
-    <tr>
-        <td>{{ pot.id }}</td>
-        <td>{{ pot.title }}</td>
-        <td>{{ pot.goal }}</td>
-        <td>{{ pot.cycle }}</td>
-        <td>{{ pot.isPrivate }}</td>
-        <td>{{ pot.amount }}</td>
-        <td>{{ pot.creator }}</td>
-    </tr>
-    {% endfor %}
-    </table>
-    
-</div>
-{% endif %}
+<h5>Exchange data:</h5>
+<p>USD: {{exchange_data.rates.USD}}</p>
+<p>GBP: {{exchange_data.rates.GBP}}</p>
+<p>AUD: {{exchange_data.rates.AUD}}</p>
+<p>CAD: {{exchange_data.rates.CAD}}</p>
 
 {% endblock %}
