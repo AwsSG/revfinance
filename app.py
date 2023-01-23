@@ -21,7 +21,7 @@ db = SQLAlchemy(app)
 
 # Association table for users and pots
 user_pots = db.Table('user_pots', 
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('Users.id')),
     db.Column('pot_id', db.Integer, db.ForeignKey('pots.id'))
     )
 
@@ -48,7 +48,7 @@ class Pots(db.Model):
     cycle = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     isPrivate = db.Column(db.Boolean, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     participants = db.Column(db.JSON())
     # String to return name when something is added to database
