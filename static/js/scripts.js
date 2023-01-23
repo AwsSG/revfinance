@@ -46,11 +46,14 @@ $(document).ready(function(){
      * Add validation for new pot form
      */
     $('#createPot').submit( (e) => {
+
         let errors = []
         const title = $('#title')
         const goal = $('#goal')
         const amount = $('#amount')
         const errorField = $('#errorMsg')
+
+        $('#invited').val(JSON.stringify(inviteList))
 
         if(title.val() === "" || title.val() === null) {
             errors.push('Please, enter a title for your money pot.')
@@ -83,6 +86,8 @@ $(document).ready(function(){
     })
     
 
+    inviteList = []
+
     /* Add list item button */
     $('#addToInvite').click( () => {
         const errorField = $('#errorMsg')
@@ -95,9 +100,9 @@ $(document).ready(function(){
             display.append(`<span class="invited" style="display:block">
             <button class="withdrawInvite" type="button" style="padding:0 10px"> X  </button>
             <p style="display:inline">${peerEmail}</p>
-            </span>
-            <input type="hidden" name="invited" value="${peerEmail}">`)
+            </span>`)
             $('#invite').val('')
+            inviteList.push(peerEmail)
         } else {
             errorField.html('Please, enter  avalid email address')
         }
@@ -107,9 +112,11 @@ $(document).ready(function(){
 
     /* Delete list item */
     function withdrawInvite() {
+        remove = $(this).index()
+        inviteList.splice(remove, 1);
         $(this).parent().remove();
     }
- 
+
 });
 
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
