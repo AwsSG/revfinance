@@ -234,13 +234,10 @@ Desktop Wireframes
 ## Credits
 
 ### Code
-<< any and all code that isn't yours...must go here >>
 
 ### Content
-<< any content, such as facts/references/text that isn't yours...must go here >>
 
-### Media
-<< you may have already done this above in the Imagery section, but just in case, please attribute Media acquisition here >>
+Written by the developers
 
 ### Acknowledgements
 
