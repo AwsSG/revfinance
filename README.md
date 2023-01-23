@@ -147,11 +147,16 @@ As a registered user:
   * [Tailwind](https://tailwindcss.com/) - user as a CSS framework to add style and layout.
   * [Flask](https://flask.palletsprojects.com/en/2.2.x/) - Foundation of the site.
   * [Balsamic](https://balsamiq.com/) - used to generate wireframes.
+  * [Fontpair](https://www.fontpair.co/): this was used to find fonts that compliment each other. 
+  * [Google Fonts](https://fonts.google.com/): this was used to import fonts into the style.css file.
+  * [Font Awesome](https://fontawesome.com/): this was used to add icons to pages to enhance user experience. 
+  * [Coolers](https://coolors.co/): this was used to create a colour pallete for the website. 
   * [Git](https://git-scm.com/) - was used for the version control of the website.
   * [GitHub](https://github.com/) - was used to host the code of the website.
   * [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/) - used to debug the website. 
   * [Am I Responsive?](http://ami.responsivedesign.is/) - To show the app on various devices.
   * [Render](https://render.com/) - To deploy our website.
+
 
 ## Initial MVP idea:
 
@@ -234,13 +239,14 @@ Desktop Wireframes
 ## Credits
 
 ### Code
-<< any and all code that isn't yours...must go here >>
+The following pages from W3Schools and dev.to were used as resources to create a burger menu for mobile devices:
+- W3Schools - [How TO - Mobile Navigation Menu](https://www.w3schools.com/howto/howto_js_mobile_navbar.asp)
+- Dev.to article by Gaurav - [Let's build a responsive navbar and hamburger menu using HTML, CSS, and Javascript](https://dev.to/devggaurav/let-s-build-a-responsive-navbar-and-hamburger-menu-using-html-css-and-javascript-4gci)
+
+Tailwind CSS documentation was used a library to find the classes for styling [Tailwind](https://tailwindcss.com/docs/installation).
 
 ### Content
-<< any content, such as facts/references/text that isn't yours...must go here >>
-
-### Media
-<< you may have already done this above in the Imagery section, but just in case, please attribute Media acquisition here >>
+Written by the developers
 
 ### Acknowledgements
 
