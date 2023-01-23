@@ -33,7 +33,7 @@ class Users(db.Model):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    joined_pots = db.Column(db.Integer, db.ForeignKey('pots.id'))
+    joined_pots = db.Column(db.Integer, db.ForeignKey('Pots.id'))
     # String to return name when something is added to database
     def __repr__(self):
         return '<Name %r>' % self.id
@@ -207,14 +207,6 @@ def create_pot():
     data = Pots.query
     return render_template("createPot.html", pots=data, exchange_data=exchange_data)
 
-
-@app.route('/pots/<int:id>')
-def pot(id):
-    pot = Pots.query.get_or_404(id)
-    participants = pot.participants.replace("[", "").replace("]", "").replace('"', '')
-    participants = participants.split(',')
-    taken_spots = len(participants)
-    return render_template('pot.html', pot=pot, participants=taken_spots)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
