@@ -234,6 +234,11 @@ Desktop Wireframes
 ## Credits
 
 ### Code
+The following pages from W3Schools and dev.to were used as resources to create a burger menu for mobile devices:
+- W3Schools - [How TO - Mobile Navigation Menu](https://www.w3schools.com/howto/howto_js_mobile_navbar.asp)
+- Dev.to article by Gaurav - [Let's build a responsive navbar and hamburger menu using HTML, CSS, and Javascript](https://dev.to/devggaurav/let-s-build-a-responsive-navbar-and-hamburger-menu-using-html-css-and-javascript-4gci)
+
+Tailwind CSS documentation was used a library to find the classes for styling [Tailwind](https://tailwindcss.com/docs/installation).
 
 ### Content
 
