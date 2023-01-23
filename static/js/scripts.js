@@ -90,9 +90,9 @@ $(document).ready(function(){
         peerId = 0
         peerEmail = $('#invite').val()
         
-        if( validateEmail(peerEmail) ) { 
+        if( validateEmail(peerEmail) && $('#invite').val() != 0) { 
             $('#addToInvite').attr("disabled", false)
-            display.append(`<span class="invited"><button class="withdrawInvite" type="button">X</button><p>${peerEmail}</p></span>`)
+            display.append(`<span class="invited" style="display:block"><button class="withdrawInvite" type="button" style="padding:0 10px"> X  </button><p style="display:inline">${peerEmail}</p></span>`)
             $('#invite').val('')
         } else {
             errorField.html('Please, enter  avalid email address')
