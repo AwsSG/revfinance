@@ -241,10 +241,8 @@ The following pages from W3Schools and dev.to were used as resources to create a
 Tailwind CSS documentation was used a library to find the classes for styling [Tailwind](https://tailwindcss.com/docs/installation).
 
 ### Content
-<< any content, such as facts/references/text that isn't yours...must go here >>
 
-### Media
-<< you may have already done this above in the Imagery section, but just in case, please attribute Media acquisition here >>
+Written by the developers
 
 ### Acknowledgements
 
