@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% if user != None %}
+    {% if user != "" %}
     <h1>Welcome, {{ user }}</h1>
 
         <!-- Header with the create pot button -->
@@ -42,12 +42,7 @@
 
     {% else %}
     <h1>Welcome!</h1>
-    
 
-    <!-- Header with the create pot button -->
-    <header class="mb-[3rem]">
-      <p class="p-5 mb-4 text-center text-xl font-bold md:text-left">Create a new pot and invite your friends:</p>
-     </header>
 
     <!-- Join to a pot -->
     <h3 class="py-2 text-center border-y-[1px] border-baby-powder">Register to join an existing pot</h3>
@@ -62,7 +57,7 @@
           <p class="text-end mb-0.5 font-bold mr-3">8/10 peers</p>
           <p class="text-end mb-6 font-bold mr-3">2 available spots left</p>
 
-          <a href="{{ url_for('/signup') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Register to join!</a>
+          <a href="{{ url_for('signup') }}" class="mx-auto mb-5 py-1.5 bg-fluorescent-blue dark:bg-rajah rounded w-[80%] text-trypan-blue dark:text-raisen-black text-sm font-bold transition-opacity hover:opacity-90 text-center">Register to join!</a>
         </div>
       </article>
       {% endfor %}
@@ -77,5 +72,5 @@
     <h3 class="py-2 mb-[3rem] text-center border-y-[1px] border-baby-powder">Private Pots</h3>
     <p class="px-5 text-center mb-[4rem] font-bold text-lg dark:text-rajah">Currently there are {{ private_pots.count() }} private pots live.</p>
 
-    {% endif %}
+  {% endif %}
 {% endblock %}
